@@ -1,3 +1,17 @@
-p {
-    text-align: center;
+.menu-outer {
+   width: 100%;
+   margin: auto;
+   display: flex;
+   justify-content: center;
+   background-color: #f0f0f0;
+   box-shadow: 0 -5px 5px -5px #333;
+}
+
+.menu-inner {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.menu-inner .menu-button {
+    margin: auto;
 }

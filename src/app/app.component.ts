@@ -32,12 +32,5 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     
-    this.httpService.get('./ololo/ololo.json').subscribe((data: Group) => {
-      this.groups = data['list'];
-    });
-
-    this.httpService.get('./ololo/nololo.json').subscribe((data:Category) => {
-      this.categories = data['list']
-    });
   }
 }
