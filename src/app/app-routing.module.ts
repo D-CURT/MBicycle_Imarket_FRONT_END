@@ -6,7 +6,7 @@ const routes: Routes = [
   {
   path: 'index',
   component: IndexComponent,
-  data: { title: 'Contact List' }
+  data: { title: 'Our products' }
 },
 { path: '',
   redirectTo: '/index',

@@ -1,9 +1,21 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
 
+<div *ngFor="let noob of noobs">
+  <button mat-button [matMenuTriggerFor]="menu">{{ noob.name }}</button>
+    <mat-menu #menu="matMenu" *ngFor="let child of noob.childs">
+      <button mat-menu-item>{{ child.name }}</button>
+    </mat-menu>
+</div>  
+
+<!--
+<div style="text-align:center" *ngFor="let noob of noobs">
+  <h1>
+    Welcome to {{ noob.name }}!
+  </h1>
+  <div *ngFor="let child of noob.childs">
+    <p> {{ child.name }} </p>
+  </div>
+</div>
+-->
 
 <router-outlet></router-outlet>
