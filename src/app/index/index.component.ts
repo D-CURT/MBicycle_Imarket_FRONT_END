@@ -10,7 +10,7 @@ export class IndexComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-   products : [
+   products = [
      {
        name: 'roof',
        price: '10',

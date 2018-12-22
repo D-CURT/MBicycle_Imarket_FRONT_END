@@ -1,17 +1,27 @@
-.menu-outer {
-   width: 100%;
-   margin: auto;
-   display: flex;
-   justify-content: center;
-   background-color: #f0f0f0;
-   box-shadow: 0 -5px 5px -5px #333;
+.product {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
 }
 
-.menu-inner {
-    display: inline-block;
-    vertical-align: top;
+.product figure figcaption {
+    box-shadow: 0 0 5px 1px black;
+    margin-top: 1em;
+    text-align: center;
 }
 
-.menu-inner .menu-button {
-    margin: auto;
+.product-description, figure {
+    width: 40%;
+}
+
+.product-description {
+    margin-right: 20%;
+}
+
+figure {
+    margin-left: 30%;
+}
+
+div {
+    border: 1px solid black;
 }

@@ -1,22 +1,32 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!--
-<div *ngFor="let noob of noobs">
-  <button mat-button [matMenuTriggerFor]="menu">{{ noob.name }}</button>
-    <mat-menu #menu="matMenu" *ngFor="let child of noob.childs">
-      <button mat-menu-item>{{ child.name }}</button>
+<div class="menu-outer">
+  <div class="inner">
+      <button mat-button [matMenuTriggerFor]="aaa" class="menu-button">AAA</button>
+      <mat-menu #aaa="matMenu">
+        <button mat-menu-item>unique item</button>
+        <button mat-menu-item>unique item</button>
+        <button mat-menu-item>unique item</button>
     </mat-menu>
-</div>  
-
-
-<div style="text-align:center" *ngFor="let noob of noobs">
-  <h1>
-    Welcome to {{ noob.name }}!
-  </h1>
-  <div *ngFor="let child of noob.childs">
-    <p> {{ child.name }} </p>
+  
+      <button mat-button [matMenuTriggerFor]="bbb" class="menu-button">BBB</button>
+      <mat-menu #bbb="matMenu">
+        <button mat-menu-item>unique item</button>
+        <button mat-menu-item>unique item</button>
+        <button mat-menu-item>unique item</button>
+        <button mat-menu-item>unique item</button>
+      </mat-menu>
+  
+      <button mat-button [matMenuTriggerFor]="ccc" class="menu-button">CCC</button>
+      <mat-menu #ccc="matMenu">
+        <button mat-menu-item>unique item</button>
+        <button mat-menu-item>unique item</button>
+      </mat-menu>
+  
+      <button mat-button [matMenuTriggerFor]="ddd" class="menu-button">DDD</button>
+      <mat-menu #ddd="matMenu">
+        <button mat-menu-item>unique item</button>
+      </mat-menu>
   </div>
 </div>
--->
 
 <router-outlet></router-outlet>
 <app-purchase></app-purchase>
