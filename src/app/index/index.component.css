@@ -22,6 +22,17 @@ figure {
     margin-left: 30%;
 }
 
+.example-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.example-form input {
+    margin: auto;
+}
+
+/* временно */
 div {
     border: 1px solid black;
 }

@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule }   from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +23,10 @@ import { PurchaseComponent } from './purchase/purchase.component';
     AppRoutingModule,
     HttpClientModule,
     MatMenuModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatInputModule,
+    FormsModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

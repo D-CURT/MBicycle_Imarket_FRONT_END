@@ -10,9 +10,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
   title = 'ololo';
-
+  hide = true;
   groups: Group[]=[];
   categories: Category[]=[];
+
+  isClick: boolean=false;
 
   noobs = [{
     name: 'sergai',
@@ -28,9 +30,16 @@ export class AppComponent implements OnInit {
     childs: [{name: 'ahaha'}, {name: 'lol'}]
   }]
 
-  constructor(private httpService: HttpClient) {}
+   constructor(private httpService: HttpClient) {}
 
   ngOnInit() {
     
   }
+
+  toggle() {
+    this.isClick = !this.isClick;
+  }
+  
 }
+
+
