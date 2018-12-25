@@ -11,12 +11,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
 import { PurchaseComponent } from './purchase/purchase.component';
+import { RoofsComponent } from './roofs/roofs.component';
+import { CatsComponent } from './cats/cats.component';
+import { DogsComponent } from './dogs/dogs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
-    PurchaseComponent
+    PurchaseComponent,
+    RoofsComponent,
+    CatsComponent,
+    DogsComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +32,7 @@ import { PurchaseComponent } from './purchase/purchase.component';
     BrowserAnimationsModule,
     MatInputModule,
     FormsModule,
-    MatFormFieldModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

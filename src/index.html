@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Ololo</title>
-  <base href=".">
+  <base href="/">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -16,36 +16,92 @@
     <div class="header-right">
       <button id="signIn">Sign in</button>
       <div id="signMenu">
-        <form action="">
-          <input type="text">
-          <input type="password">
-          <input id="inputIn" type="submit">
+        <form action="" id="authorization">
+          <input type="text" name="j_username" placeholder="Username">
+          <input type="password" name="j_password" placeholder="Password">
+          <input id="submitSignIn" type="submit" value="Sign In">
         </form>
       </div>
 
-      <!-- script for hidden ^ -->
-      <script>
-        var button = document.getElementById('signIn');
-        var signMenu = document.getElementById('signMenu');
-        var input = document.getElementById('inputIn');
-
-        button.onclick = function() {
-          signMenu.style.display = "block";
-        }
-        input.onclick = function() {
-          signMenu.style.display = "none";
-        } 
-      </script>
-
-      <button class="sign">Sign up</button>
-      <div class="sign-up">
-          <form action="">
-              <input type="text">
-              <input type="password">
-              <input type="submit">
+      <button id="signUp">Sign up</button>
+      <div id="signUpMenu">
+          <form action="" id="registration">
+              <input type="text" name="j_username" placeholder="Username">
+              <input type="password" name="j_password" placeholder="Password">
+              <input type="text" name="name" placeholder="Your name">
+              <input type="text" name="email" placeholder="Email">
+              <input type="text" name="phone" placeholder="Phone">
+              <input type="text" name="adress" placeholder="Adress">
+              <input id="submitSignUp" type="submit" value="Sign Up">
             </form>
       </div>
     </div>
+      <!-- script for hidden ^ -->
+      <script>
+        var signIn = document.getElementById('signIn');
+        var signUp = document.getElementById('signUp');
+        var signMenu = document.getElementById('signMenu');
+        var signUpMenu = document.getElementById('signUpMenu');
+        var submitIn = document.getElementById('submitSignIn');
+        var submitUp = document.getElementById('submitSignUp');
+
+        signIn.onclick = function() {
+          if (signUpMenu.style.display != "block") {
+            signMenu.style.display = "block";
+          }
+        }
+        submitIn.onclick = function() {
+          signMenu.style.display = "none";
+        }
+
+        signUp.onclick = function() {
+
+          if (signMenu.style.display != "block") {
+            signUpMenu.style.display = "block";
+          }
+        }
+        submitUp.onclick = function() {
+          signUpMenu.style.display = "none";
+        }
+      </script>
+      <!-- script for submitting -->
+      <script>
+        $('#authorization').on('submit', function(event){
+
+        var obj = $('#authorization').serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: '/authorization',
+            dataType: 'json',
+            data: obj,
+            contentType : 'application/json',
+            success: function(data) {
+                alert(data)
+            }
+        });
+
+        return false;
+        });
+
+        $('#registration').on('submit', function(event){
+
+        var obj = $('#registration').serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: '/registration',
+            dataType: 'json',
+            data: obj,
+            contentType : 'application/json',
+            success: function(data) {
+                alert(data)
+            }
+        });
+
+        return false;
+        });
+      </script>
   </header>
   
   <nav layout="row" layout-align="center center">
