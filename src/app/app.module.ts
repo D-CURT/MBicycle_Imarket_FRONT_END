@@ -10,19 +10,19 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
-import { PurchaseComponent } from './purchase/purchase.component';
 import { RoofsComponent } from './roofs/roofs.component';
 import { CatsComponent } from './cats/cats.component';
 import { DogsComponent } from './dogs/dogs.component';
+import { ManageComponent } from './manage/manage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
-    PurchaseComponent,
     RoofsComponent,
     CatsComponent,
-    DogsComponent
+    DogsComponent,
+    ManageComponent
   ],
   imports: [
     BrowserModule,

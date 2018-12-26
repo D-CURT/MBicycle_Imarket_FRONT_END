@@ -4,6 +4,7 @@ import { IndexComponent } from './index/index.component';
 import { RoofsComponent } from './roofs/roofs.component';
 import { CatsComponent } from './cats/cats.component';
 import { DogsComponent } from './dogs/dogs.component';
+import { ManageComponent } from './manage/manage.component'
 
 const routes: Routes = [  
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
 {
   path: 'dogs',
   component: DogsComponent
+},
+{
+  path: 'manage',
+  component: ManageComponent
 }];
 
 @NgModule({

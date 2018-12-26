@@ -1,3 +1,17 @@
-<p>
-  dogs works!
-</p>
+<form class="example-form">
+  <mat-form-field>
+    <input matInput placeholder="search" value="">
+  </mat-form-field>
+</form>
+
+<div class="product" *ngFor="let product of products">
+    <figure>
+      <img src="images/product-image.png" alt="product-image">
+      <figcaption>{{ product.price }}$</figcaption>
+    </figure>
+    <div class="product-description">
+      <h4>{{ product.name }}</h4>
+      <p>{{ product.previev }}</p>
+      <p>{{ product.storeStatus }}</p>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+#addForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 22em;
+}
+
+#addForm * {
+    margin: auto;
+}
+
+h4 {
+    text-align: center;
+}
