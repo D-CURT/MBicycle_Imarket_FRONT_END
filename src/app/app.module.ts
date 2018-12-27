@@ -14,6 +14,9 @@ import { RoofsComponent } from './roofs/roofs.component';
 import { CatsComponent } from './cats/cats.component';
 import { DogsComponent } from './dogs/dogs.component';
 import { ManageComponent } from './manage/manage.component';
+import { LoginComponent } from './login/login.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { ManageComponent } from './manage/manage.component';
     RoofsComponent,
     CatsComponent,
     DogsComponent,
-    ManageComponent
+    ManageComponent,
+    LoginComponent,
+    NavBarComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

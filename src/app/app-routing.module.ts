@@ -5,6 +5,8 @@ import { RoofsComponent } from './roofs/roofs.component';
 import { CatsComponent } from './cats/cats.component';
 import { DogsComponent } from './dogs/dogs.component';
 import { ManageComponent } from './manage/manage.component'
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [  
   {
@@ -31,6 +33,14 @@ const routes: Routes = [
 {
   path: 'manage',
   component: ManageComponent
+},
+{
+  path: 'login',
+  component: LoginComponent
+},
+{
+  path: 'registration',
+  component: RegistrationComponent
 }];
 
 @NgModule({
