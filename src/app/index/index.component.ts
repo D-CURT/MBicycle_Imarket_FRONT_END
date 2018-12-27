@@ -10,29 +10,12 @@ export class IndexComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-   products = [
-     {
-       name: 'roof',
-       price: '10',
-       previev: 'the roof is on fire, burn motherfucker',
-       storeStatus: 'est on sklad'
-     }, {
-       name: 'cat',
-       price: '100',
-       previev: 'good cat',
-       storeStatus: 'est on sklad'
-    }, {
-       name: 'dog',
-       price: '007',
-       previev: 'bad dog',
-       storeStatus: 'est on sklad'
-    }
-   ]
+   products: any;
 
   ngOnInit() {
-//    this.http.get('/index').subscribe(data => {
-//      this.query = data;
-//    });
+    this.http.get('/products/allProductsSortedByName').subscribe(data => {
+      this.products = data;
+    });
   }
 
 }
