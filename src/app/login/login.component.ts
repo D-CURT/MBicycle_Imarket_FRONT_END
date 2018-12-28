@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Observable} from 'rxjs';
 
@@ -19,24 +19,16 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    sessionStorage.setItem('token', '');
   }
 
   login() {
-    let url = '/login';
-    this.http.post<Observable<boolean>>(url, {
-      userName: this.model.username,
-      password: this.model.password
-  }).subscribe(isValid => {
-      if (isValid) {
-          sessionStorage.setItem(
-            'token', 
-            btoa(this.model.username + ':' + this.model.password)
-          );
-      this.router.navigate(['']);
-      } else {
-          alert("Authentication failed.")
-      }
-  });
+    let body = new HttpParams;
+    body = body.set('username', this.model.username);
+    body = body.set('password', this.model.password);
+    this.http.post('/login', body, {responseType: 'arraybuffer'}).subscribe(data => {
+      // login successful so redirect to return url      
+      this.router.navigateByUrl("/index");
+    });
+
   }
 }
