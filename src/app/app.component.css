@@ -8,8 +8,14 @@
  }
  
  .menu-inner {
-     display: inline-block;
-     vertical-align: top;
+     display: flex;
+     justify-content: space-evenly;
+     flex-direction: column;
+     margin-left: 2px;
+ }
+
+ .menu-inner * {
+     margin:auto;
  }
  
  .menu-inner .menu-button {

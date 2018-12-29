@@ -1,4 +1,5 @@
 <app-nav-bar></app-nav-bar>
+<!--
 <div class="menu-outer">
   <div class="inner">
       <button mat-button [matMenuTriggerFor]="aaa" class="menu-button">Ololo purchases</button>
@@ -26,9 +27,21 @@
       <mat-menu #ddd="matMenu">
         <button mat-menu-item>unique item</button>
       </mat-menu>
-  </div>
+        
+    </div>
 </div>
+    -->
+    <div class="menu-outer">
+      <div class="menu-inner" *ngFor="let category of categories">
+        <span>{{ category.name }}</span>
+          <select>
+              <a routerLink=""><option *ngFor="let group of category.groups">{{ group.name }}</option></a>
+          </select>
+      </div>
+    </div>
+
 
 <a routerLink="/manage"><button>manage this shit</button></a>
 
 <router-outlet></router-outlet>
+

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Group } from './entities/group';
-import { Category } from './entities/category'
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -10,18 +8,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
   title = 'ololo';
-  noobs = [{
+  categories = [{
     name: 'sergai',
-    childs: [{name: 'aaa'}, {name: 'ooo'}] 
+    groups: [{name: 'aaa'}, {name: 'ooo'}] 
   }, {
     name: 'xxx',
-    childs: [{name: 'ahaha'}, {name: 'lol'}]
+    groups: [{name: 'ahaha'}, {name: 'lol'}]
   },{
     name: 'xxx',
-    childs: [{name: 'ahaha'}, {name: 'lol'}]
+    groups: [{name: 'ahaha'}, {name: 'lol'}]
   },{
     name: 'xxx',
-    childs: [{name: 'ahaha'}, {name: 'lol'}]
+    groups: [{name: 'ahaha'}, {name: 'lol'}]
   }]
 
    constructor(private httpService: HttpClient) {}
