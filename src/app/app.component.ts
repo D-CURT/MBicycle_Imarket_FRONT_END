@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Group } from './entities/group';
-import { Category } from './entities/category'
 import { HttpClient } from '@angular/common/http';
 
 @Component({
