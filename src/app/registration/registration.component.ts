@@ -12,6 +12,9 @@ export class RegistrationComponent implements OnInit {
 
   model: any = {};
 
+  isRegistred: boolean; 
+  isError: boolean;
+
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -19,20 +22,45 @@ export class RegistrationComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.isRegistred=false;
+    this.isError=false;
   }
 
   register() {
+    this.isRegistred=false;
+    this.isError=false;
 
     let tosend = this.model.login + this.model.password;
 
     const options = {headers: {'Content-Type': 'application/json'}};
-    this.http.post('/registration', this.model, options).subscribe(
-        data => console.info('%%%%' + JSON.stringify(data) + "%%%@")  //FIXME: Return something? React on it somehow?
-    );
+    this.http.post('/registration', this.model, options)
+      .subscribe(
+      
+        (res: Response) => {
+          console.log('[Registration] Point Entry IN res: response');
+          //if (res.status==200) {
+            console.log('Registration Successfull');
+            this.isRegistred=true;
+            (async () => {  
+              await new Promise((resolve) => setTimeout(() => resolve(), 4000));
+              this.router.navigateByUrl("/index"); 
+            })();
+          //}
+        },
+        (error) => {
+          let errorResponsed = error as Response;
+          console.log('Error status (response) = ' + errorResponsed.status);
+          if (errorResponsed.status==409) {
+            console.log('Registration failed. User with such username is already exists. Try another.');
+            document.getElementById("errorText").innerText  = "   Registration failed. User with such username is already exists. Try another.";
+            this.isError=true;
+          }
+          else {
+            console.log('Unknown registration error: ' + errorResponsed.status);
+          }
+        }
+      )
 
-    // this.http.post<T>('/registration', JSON.stringify(data), options).subscribe(
-    //   (t: T) => console.info(JSON.stringify(t))
-    // );
   }
 
 }

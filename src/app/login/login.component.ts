@@ -12,10 +12,10 @@ import { error } from 'util';
 })
 export class LoginComponent implements OnInit {
 
+  model: any = {};
+
   isLogged: boolean; 
   isError: boolean;
-
-  model: any = {};
 
   constructor(
     private http: HttpClient,
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     
       .subscribe (
         (res: Response) => {
-          alert('resp');
+          console.log('[Login] Point Entry IN res: response');
         },
         (error) => {
           let errorResponsed = error as Response;
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
             this.isError=true;
           }
           else {
-            console.log('Unknown error: ' + errorResponsed.status);
+            console.log('Unknown login error: ' + errorResponsed.status);
           }
         }
       )
