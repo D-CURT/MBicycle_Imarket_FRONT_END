@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ProductGetterService } from './product-getter.service';
+
 
 @Component({
   selector: 'app-root',
@@ -8,26 +10,28 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
   title = 'ololo';
-  noobs = [{
-    name: 'sergai',
-    childs: [{name: 'aaa'}, {name: 'ooo'}] 
-  }, {
-    name: 'xxx',
-    childs: [{name: 'ahaha'}, {name: 'lol'}]
-  },{
-    name: 'xxx',
-    childs: [{name: 'ahaha'}, {name: 'lol'}]
-  },{
-    name: 'xxx',
-    childs: [{name: 'ahaha'}, {name: 'lol'}]
-  }]
 
-   constructor(private httpService: HttpClient) {}
+  targetGroup: string;
+
+  categories: any;
+
+  logggg: string;
+
+
+   constructor(
+     private httpService: HttpClient,
+     private getService: ProductGetterService
+     ) {}
 
   ngOnInit() {
-    
+    this.httpService.get('/categories/allCategoriesSortedByName').subscribe(data=>{
+      this.categories = data;
+    })
   }
-  
+
+  pushGroupName() {
+    this.getService.setGroupName(this.targetGroup);
+  }
 }
 
 

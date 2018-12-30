@@ -14,6 +14,7 @@ import { ManageComponent } from './manage/manage.component';
 import { LoginComponent } from './login/login.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RegistrationComponent } from './registration/registration.component';
     ManageComponent,
     LoginComponent,
     NavBarComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,
