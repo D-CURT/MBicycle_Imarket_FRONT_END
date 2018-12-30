@@ -1,0 +1,38 @@
+.product {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.product figure figcaption {
+    box-shadow: 0 0 5px 1px black;
+    margin-top: 1em;
+    text-align: center;
+}
+
+.product-description, figure {
+    width: 40%;
+}
+
+.product-description {
+    margin-right: 20%;
+}
+
+figure {
+    margin-left: 30%;
+}
+
+.example-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.example-form input {
+    margin: auto;
+}
+
+/* временно */
+div {
+    border: 1px solid black;
+}

@@ -11,7 +11,7 @@ html {
     flex-direction: column;
     justify-content: center;
     width: 80%;
-    overflow: hidden;
+    overflow: visible;
     background-color: white;
   }
 
