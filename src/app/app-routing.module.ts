@@ -11,7 +11,7 @@ const routes: Routes = [
   {
   path: 'index',
   component: IndexComponent,
-  data: { title: 'Our products' }
+  data: { title: 'Our products' },
 },
 { path: '',
   redirectTo: '/index',
@@ -26,12 +26,16 @@ const routes: Routes = [
   component: LoginComponent
 },
 {
-  path: 'registration',
-  component: RegistrationComponent
-},
-{
   path: 'products',
   component: ProductsComponent
+},
+{
+  path: 'products_1',
+  component: ProductsComponent
+},
+{
+  path: 'registration',
+  component: RegistrationComponent
 },
 {
   path: 'search',
@@ -41,8 +45,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(
-      routes, 
-      { enableTracing: true } // <-- debugging purposes only
+      routes
       )
   ],
   exports: [RouterModule]

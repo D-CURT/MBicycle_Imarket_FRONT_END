@@ -14,7 +14,10 @@
       <li><a>{{ category.name }}</a>
           <ul class="submenu">
             <div *ngFor="let group of category.groups">
-              <li><a routerLink="/products" (click)="targetGroup = this.group.name; pushGroupName()">{{ group.name }}</a></li>
+              <li>
+                <a routerLink="/products" (click)="targetGroup = this.group.name; pushGroupName()" *ngIf="path">{{ group.name }}</a>
+                <a routerLink="/products_1" (click)="targetGroup = this.group.name; pushGroupName()" *ngIf="!path">{{ group.name }}</a>
+              </li>
             </div>
           </ul>
       </li>

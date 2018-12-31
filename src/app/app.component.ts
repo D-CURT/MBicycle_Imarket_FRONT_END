@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductGetterService } from './product-getter.service';
+import { ProductsComponent } from './products/products.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,26 +13,28 @@ import { ProductGetterService } from './product-getter.service';
 export class AppComponent implements OnInit {
   title = 'ololo';
 
+  path: boolean=false;
+
   targetGroup: string;
 
   categories: any;
 
-  logggg: string;
-
-
    constructor(
      private httpService: HttpClient,
-     private getService: ProductGetterService
+     private getService: ProductGetterService,
      ) {}
 
   ngOnInit() {
     this.httpService.get('/categories/allCategoriesSortedByName').subscribe(data=>{
       this.categories = data;
     })
+  
   }
 
   pushGroupName() {
-    this.getService.setGroupName(this.targetGroup);
+    this.getService.groupName = this.targetGroup;
+    this.path = !this.path;
+    console.log("push method end");
   }
 }
 

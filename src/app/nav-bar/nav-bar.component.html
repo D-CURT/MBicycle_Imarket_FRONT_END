@@ -12,11 +12,11 @@
   </div>
 
   <div class="header-right">
-    <a routerLink="/login"><button id="signIn">Sign in</button></a>
+    <a routerLink="/login"><button id="signIn" *ngIf="!isLogged">Sign in</button></a>
  
-    <a routerLink="/registration"><button id="signUp">Sign up</button></a>
+    <a routerLink="/registration"><button id="signUp" *ngIf="!isLogged">Sign up</button></a>
 
-    <a><button class="logout" value="Logout" id="logout" (click)="logout()">Logout</button></a>    
+    <a><button class="logout" value="Logout" id="logout" (click)="logout()" *ngIf="isLogged">Logout</button></a>    
     
   </div> 
 

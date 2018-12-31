@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SearchComponent } from '../search/search.component';
 
 import {Globals} from '../globals'
+import { ProductGetterService } from '../product-getter.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,15 +15,18 @@ import {Globals} from '../globals'
 export class NavBarComponent implements OnInit {
 
   MyCtrl : any;
+  isLogged: boolean=false;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private searchComp: SearchComponent,
     private globals: Globals,
+    private getService: ProductGetterService
     ) { }
 
   ngOnInit() {
+    this.isLogged = this.getService.isLogged;
   }
 
   logout() {
@@ -38,6 +42,8 @@ export class NavBarComponent implements OnInit {
         if(errorResponsed.url.endsWith('logoutdone')) {
           console.log('[Logout] Server Redirects, therefore logout is successfull.');
           //TODO: Maybe somehow show a popup message that logout is successfull
+          this.getService.isLogged = false;
+          this.isLogged = false;
           this.router.navigateByUrl('/index');
         }
       }
