@@ -15,6 +15,9 @@ import { LoginComponent } from './login/login.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProductsComponent } from './products/products.component';
+import { SearchComponent } from './search/search.component';
+
+import { Globals } from './globals';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { ProductsComponent } from './products/products.component';
     NavBarComponent,
     RegistrationComponent,
     ProductsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,7 @@ import { ProductsComponent } from './products/products.component';
     FormsModule,
     MatFormFieldModule
   ],
-  providers: [],
+  providers: [Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,12 +23,18 @@ header {
   .header-left {
     margin-bottom: 0.5em;
   }
+
+  /* //FIXME: Temporary style for search */
+  .header-center {
+    padding-left: 20%;  
+    
+  }
   
   .header-right {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    width: 300px;
+    width: 400px;
     margin-top: 0.3em;
   }
   

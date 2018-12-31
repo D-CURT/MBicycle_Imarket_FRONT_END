@@ -2,9 +2,22 @@
   <div class="header-left">
     <h3><a routerLink="/index">IMarket</a></h3>
   </div>
+
+  <div class = "header-center">
+    <form class="example-form">
+      <mat-form-field>
+        <input id = "searchInputId" (keypress)="searchKeyPress($event)" matInput placeholder="search" value="">
+      </mat-form-field>
+    </form>
+  </div>
+
   <div class="header-right">
     <a routerLink="/login"><button id="signIn">Sign in</button></a>
  
     <a routerLink="/registration"><button id="signUp">Sign up</button></a>
-  </div>
+
+    <a><button class="logout" value="Logout" id="logout" (click)="logout()">Logout</button></a>    
+    
+  </div> 
+
 </header>
