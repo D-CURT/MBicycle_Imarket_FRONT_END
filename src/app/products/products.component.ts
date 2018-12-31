@@ -10,9 +10,11 @@ import { ProductGetterService } from '../product-getter.service';
 export class ProductsComponent implements OnInit {
 
   products: any;
+
+  item: any;
   
   constructor(
-    private getGroupName: ProductGetterService,
+    private getService: ProductGetterService,
     private http: HttpClient,
     ) {  }
 
@@ -20,9 +22,14 @@ export class ProductsComponent implements OnInit {
     
     console.log('initialize');
 
-    this.products = this.http.get('/products/allProductsWithGroupSortedByName/' + this.getGroupName.groupName).subscribe(data => {
+    this.products = this.http.get('/products/allProductsWithGroupSortedByName/' + this.getService.groupName).subscribe(data => {
       this.products = data;
       console.log("inside http client");
     }) 
+  }
+
+  pushProductInfo() {
+    this.getService.product = this.item;
+    console.log('information about product has been sent');
   }
 }

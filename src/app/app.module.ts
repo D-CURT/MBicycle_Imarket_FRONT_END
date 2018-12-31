@@ -18,6 +18,7 @@ import { ProductsComponent } from './products/products.component';
 import { SearchComponent } from './search/search.component';
 
 import { Globals } from './globals';
+import { ProductPageComponent } from './product-page/product-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { Globals } from './globals';
     NavBarComponent,
     RegistrationComponent,
     ProductsComponent,
-    SearchComponent
+    SearchComponent,
+    ProductPageComponent
   ],
   imports: [
     BrowserModule,
