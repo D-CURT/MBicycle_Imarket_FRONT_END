@@ -13,9 +13,11 @@ export class IndexComponent implements OnInit {
    products: any;
 
   ngOnInit() {
+
     this.http.get('/products/allProductsSortedByName').subscribe(data => {
       this.products = data;
     });
+    
   }
 
 }
