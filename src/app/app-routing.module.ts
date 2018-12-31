@@ -26,12 +26,12 @@ const routes: Routes = [
   component: LoginComponent
 },
 {
-  path: 'registration',
-  component: RegistrationComponent
-},
-{
   path: 'products',
   component: ProductsComponent
+},
+{
+  path: 'registration',
+  component: RegistrationComponent
 },
 {
   path: 'search',

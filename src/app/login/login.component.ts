@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import {Observable} from 'rxjs';
-import { ok } from 'assert';
-import { error } from 'util';
+import { ProductGetterService } from '../product-getter.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private getService: ProductGetterService
     ) { }
 
   ngOnInit() {
@@ -50,6 +49,7 @@ export class LoginComponent implements OnInit {
           if (errorResponsed.status==404) {
             console.log('Login Successfull');
             this.isLogged=true;
+            this.getService.isLogged = true;
             (async () => {  
               await new Promise((resolve) => setTimeout(() => resolve(), 2000));
               this.router.navigateByUrl("/index"); 
