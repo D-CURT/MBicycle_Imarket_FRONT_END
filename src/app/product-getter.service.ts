@@ -10,12 +10,6 @@ export class ProductGetterService {
   groupName: string;
   isLogged: boolean=false;
 
-  constructor(
-    private http: HttpClient
-    ) { }
-
-  setGroupName(groupName: string) {
-    this.groupName = groupName;
-  }
+  constructor() { }
 
 }

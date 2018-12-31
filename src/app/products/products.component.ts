@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductGetterService } from '../product-getter.service';
 
@@ -9,56 +9,20 @@ import { ProductGetterService } from '../product-getter.service';
 })
 export class ProductsComponent implements OnInit {
 
-  products: any = [
-    {
-      name: 'ololo',
-      price: '12123',
-      storestatus: 'asdasd',
-      descriptionPreviev: 'asdasdasd'
-    },
-    {
-      name: 'ololo',
-      price: '12123',
-      storestatus: 'asdasd',
-      descriptionPreviev: 'asdasdasd'
-    }
-  ];
-  groupName: string;
-
+  products: any;
+  
   constructor(
     private getGroupName: ProductGetterService,
     private http: HttpClient,
-    ) { }
+    ) {  }
 
   ngOnInit() {
-  }
+    
+    console.log('initialize');
 
-  reload() {
-    console.log("reload method");  
-    this.products = this.http.get('/products/allProductsWithGroupSortedByName/' + this.groupName).subscribe(data => {
+    this.products = this.http.get('/products/allProductsWithGroupSortedByName/' + this.getGroupName.groupName).subscribe(data => {
       this.products = data;
-      console.log("inside httpclient");
+      console.log("inside http client");
     }) 
-    this.products = [
-      {
-        name: '111',
-        price: '222',
-        storestatus: 'asdasd',
-        descriptionPreviev: 'asdasdasd'
-      },
-      {
-        name: '222',
-        price: '333',
-        storestatus: 'asdasd',
-        descriptionPreviev: 'asdasdasd'
-      }
-    ];
-
-    console.log(this.products);
-  }
-
-  setGroupName(name: string) {
-    this.groupName = name;
-    console.log("group name setted");
   }
 }

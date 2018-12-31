@@ -43,6 +43,7 @@ export class NavBarComponent implements OnInit {
           console.log('[Logout] Server Redirects, therefore logout is successfull.');
           //TODO: Maybe somehow show a popup message that logout is successfull
           this.getService.isLogged = false;
+          this.isLogged = false;
           this.router.navigateByUrl('/index');
         }
       }

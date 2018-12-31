@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductGetterService } from './product-getter.service';
 import { ProductsComponent } from './products/products.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,18 +13,11 @@ import { ProductsComponent } from './products/products.component';
 export class AppComponent implements OnInit {
   title = 'ololo';
 
+  path: boolean=false;
+
   targetGroup: string;
 
-  categories: any = [
-    {
-      name: 'olo',
-      groups: [{name: '111'}, {name: '222'}]
-    },
-    {
-      name: 'ole',
-      groups: [{name: '333'}, {name: '444'}]
-    }
-  ];
+  categories: any;
 
    constructor(
      private httpService: HttpClient,
@@ -38,9 +32,8 @@ export class AppComponent implements OnInit {
   }
 
   pushGroupName() {
-    let products = new ProductsComponent(this.getService, this.httpService);
-    products.setGroupName(this.targetGroup);
-    products.reload();
+    this.getService.groupName = this.targetGroup;
+    this.path = !this.path;
     console.log("push method end");
   }
 }
