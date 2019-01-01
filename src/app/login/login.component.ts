@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
             console.log('Login Successfull');
             this.isLogged=true;
             this.getService.isLogged = true;
+            console.log(this.getService.isLogged);
             (async () => {  
               await new Promise((resolve) => setTimeout(() => resolve(), 2000));
               this.router.navigateByUrl("/index"); 

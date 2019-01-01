@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProductsComponent } from './products/products.component';
 import { SearchComponent } from './search/search.component';
+import { ProductPageComponent } from './product-page/product-page.component';
 
 const routes: Routes = [  
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
 {
   path: 'search',
   component: SearchComponent
+},
+{
+  path: 'product',
+  component: ProductPageComponent
 }];
 
 @NgModule({

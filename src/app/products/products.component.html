@@ -4,8 +4,8 @@
       <figcaption>{{ product.price }}$</figcaption>
     </figure>
     <div class="product-description">
-      <h4>{{ product.name }}</h4>
-      <p>{{ product.descriptionPreviev }}</p>
+      <a routerLink="/product" (click)="item=this.product;pushProductInfo()"><h4>{{ product.name }}</h4></a>
+      <p>{{ product.descriptionPreview }}</p>
       <p>{{ product.storeStatus }}</p>
     </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-//import { ProductGetterService } from '../product-getter.service';
+import { ProductGetterService } from '../product-getter.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -11,10 +11,11 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 export class SearchComponent implements OnInit {
 
   products: any;
+  item: any;
 
   constructor(
     private http: HttpClient,
-   // private getGroupName: ProductGetterService,
+    private getService: ProductGetterService,
     private router: Router,
     private route: ActivatedRoute,
     ) { }
@@ -26,6 +27,11 @@ export class SearchComponent implements OnInit {
       this.products = data;
     })
 
+  }
+
+  pushProductInfo() {
+    this.getService.product = this.item;
+    console.log('information about product has been sent');
   }
 
 }

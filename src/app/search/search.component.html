@@ -4,7 +4,7 @@
       <figcaption>{{ product.price }}$</figcaption>
     </figure>
     <div class="product-description">
-      <h4>{{ product.name }}</h4>
+      <a routerLink="/product" (click)="item=this.product;pushProductInfo()"><h4>{{ product.name }}</h4></a>
       <p>{{ product.descriptionPreviev }}</p>
       <p>{{ product.storeStatus }}</p>
     </div>
