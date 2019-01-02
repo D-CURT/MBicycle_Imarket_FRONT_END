@@ -10,11 +10,20 @@ export class ManageComponent implements OnInit {
   form: any = {};
   files: any;
 
-  constructor(private http: HttpClient) { 
-    this.form = {
-      name: {}
+  categories = [
+    {
+      name: 'first',
+      groups: [{name: '1'}, {name: '2'}, {name: '1'}]
+    },
+    {
+      name: 'second',
+      groups: [{name: '6'}, {name: '6'}, {name: '6'}]
     }
-  }
+  ]
+  items: any;
+
+  constructor(private http: HttpClient) { 
+ }
 
   ngOnInit() {
   }

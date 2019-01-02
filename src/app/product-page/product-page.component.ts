@@ -11,6 +11,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class ProductPageComponent implements OnInit {
 
   product: any;
+  productsss: string[] = [];
   store: string='может быть и есть';
 
   constructor(
@@ -29,7 +30,8 @@ export class ProductPageComponent implements OnInit {
   }
 
   addingToCart() {
-    let body = [{id: this.getService.product.id}]
+    this.productsss.push(this.getService.product.id)
+    let body = {productsIds: this.productsss}
     this.cartService.addProduct(this.getService.product.id);
     this.http.post('/orders/add', body).subscribe(
       (res: Response) => {

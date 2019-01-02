@@ -1,8 +1,18 @@
 <h4>Manage page</h4>
 <form id="addForm" (ngSubmit)="f.form.valid && submitRegister()" #f="ngForm" novalidate> 
   <input type="text" name="name" placeholder="Product name" [(ngModel)]="form.name" #name="ngModel">
-  <input type="text" name="category" placeholder="Product category" [(ngModel)]="form.category" #category="ngModel">
-  <input type="text" name="group" placeholder="Product group" [(ngModel)]="form.group" #group="ngModel">
+  
+  <div>
+    <ul *ngFor="let category of categories">
+      <li (click)="this.items = this.category.groups">{{ category.name }}</li>
+    </ul>
+    <ul *ngFor="let item of items">
+      <li>{{item.name}}</li>
+    </ul>
+  </div>
+  
+  <!-- <input type="text" name="category" placeholder="Product category" [(ngModel)]="form.category" #category="ngModel">
+  <input type="text" name="group" placeholder="Product group" [(ngModel)]="form.group" #group="ngModel"> -->
   <input type="file" name="image" (change)="addImage($event)">
   <textarea name="description" id="description" cols="30" rows="10" [(ngModel)]="form.description" #description="ngModel"></textarea>
   <input type="submit">
