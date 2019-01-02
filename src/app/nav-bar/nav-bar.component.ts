@@ -6,6 +6,7 @@ import { SearchComponent } from '../search/search.component';
 import {Globals} from '../globals'
 import { ProductGetterService } from '../product-getter.service';
 import { RegistrationComponent } from '../registration/registration.component';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,17 +20,21 @@ export class NavBarComponent implements OnInit {
   isLogged: boolean;
   isDebug: boolean;
 
+  productCount: number;
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private searchComp: SearchComponent,
     private globals: Globals,
     public getService: ProductGetterService,
+    public cartService: CartService
     ) { }
 
   ngOnInit() {
     this.isDebug = false;   //Set true if debugging...
     this.isLogged = false;
+    this.productCount = 0;
     //this.isLoggedN = this.getService.isLogged;
   }
 
@@ -76,6 +81,10 @@ export class NavBarComponent implements OnInit {
       //this.searchComp.ngOnInit();
       this.router.navigateByUrl('/index', {skipLocationChange: true}).then(()=>this.router.navigate(["/search"])); //Костыль для перезагрузки данных
     }
+  }
+
+  onButtonCartClick() {
+   
   }
 
 }
