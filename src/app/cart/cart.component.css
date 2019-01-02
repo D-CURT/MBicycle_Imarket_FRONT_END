@@ -1,0 +1,29 @@
+h3, div, img {
+    margin: auto;
+    border: 1px solid black;
+}
+
+.outer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.product {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 40%;
+    margin-top: 2%;
+}
+
+.product > figure {
+    width: 50%;
+}
+
+.product > figure > img {
+    width: 50%;
+    height: 50%;
+}
+
+

@@ -6,6 +6,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule }   from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,12 @@ import { ManageComponent } from './manage/manage.component';
 import { LoginComponent } from './login/login.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ProductsComponent } from './products/products.component';
+import { SearchComponent } from './search/search.component';
+
+import { Globals } from './globals';
+import { ProductPageComponent } from './product-page/product-page.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +29,11 @@ import { RegistrationComponent } from './registration/registration.component';
     ManageComponent,
     LoginComponent,
     NavBarComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProductsComponent,
+    SearchComponent,
+    ProductPageComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +43,10 @@ import { RegistrationComponent } from './registration/registration.component';
     BrowserAnimationsModule,
     MatInputModule,
     FormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCheckboxModule
   ],
-  providers: [],
+  providers: [Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
