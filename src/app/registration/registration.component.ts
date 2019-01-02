@@ -2,11 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Observable} from 'rxjs';
+import { ProductGetterService } from '../product-getter.service';
+import { getDefaultService } from 'selenium-webdriver/chrome';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
+  providers : [NavBarComponent, SearchComponent]
 })
 export class RegistrationComponent implements OnInit {
 
@@ -18,7 +23,9 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private getService: ProductGetterService,
+    private navBarComp: NavBarComponent
     ) { }
 
   ngOnInit() {
@@ -40,10 +47,12 @@ export class RegistrationComponent implements OnInit {
           console.log('[Registration] Point Entry IN res: response');
           //if (res.status==200) {
             console.log('Registration Successfull');
-            this.isRegistred=true;
             (async () => {  
               await new Promise((resolve) => setTimeout(() => resolve(), 4000));
               this.router.navigateByUrl("/index"); 
+              this.isRegistred=true;
+              this.getService.isLogged = true;
+              this.navBarComp.isLogged = true;
             })();
           //}
         },

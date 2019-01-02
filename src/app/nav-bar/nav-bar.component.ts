@@ -5,6 +5,7 @@ import { SearchComponent } from '../search/search.component';
 
 import {Globals} from '../globals'
 import { ProductGetterService } from '../product-getter.service';
+import { RegistrationComponent } from '../registration/registration.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,18 +16,34 @@ import { ProductGetterService } from '../product-getter.service';
 export class NavBarComponent implements OnInit {
 
   MyCtrl : any;
-  isLogged: boolean=false;
+  isLogged: boolean;
+  isDebug: boolean;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private searchComp: SearchComponent,
     private globals: Globals,
-    private getService: ProductGetterService
+    public getService: ProductGetterService,
     ) { }
 
   ngOnInit() {
-    this.isLogged = this.getService.isLogged;
+    this.isDebug = false;   //Set true if debugging...
+    this.isLogged = false;
+    //this.isLoggedN = this.getService.isLogged;
+  }
+
+  getCond() {
+    console.log('isLog = ' + this.isLogged);
+    console.log('while this.getService.isLog = '+ this.getService.isLogged);
+  }
+
+  setIsLogged(cond: boolean) {
+    this.isLogged = cond;
+  }
+
+  manual() {
+    this.isLogged = true;
   }
 
   logout() {
