@@ -54,12 +54,12 @@ export class LoginComponent implements OnInit {
           console.log('Error status (response) = ' + errorResponsed.status);
           if (errorResponsed.status==404) {
             console.log('Login Successfull');
+            this.isLogged=true;
+            this.getService.isLogged = true;
+            this.navBarComponent.setIsLogged(true);
+            this.navBarComponent.isLogged = true;
            (async () => {  
               await new Promise((resolve) => setTimeout(() => resolve(), 2000));
-              this.isLogged=true;
-              this.getService.isLogged = true;
-              this.navBarComponent.setIsLogged(true);
-              this.navBarComponent.isLogged = true;
               console.log('After set, isLog = ' + this.isLogged + ' | and getService.isLog = ' + this.getService.isLogged + " | and navBarComp.isLog = " + this.navBarComponent.isLogged);  
               this.router.navigateByUrl("/index"); 
             })();
