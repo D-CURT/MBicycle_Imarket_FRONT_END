@@ -1,10 +1,15 @@
 <h4>Manage profile page</h4>
 <form id="updateForm" (ngSubmit)="f.form.valid && submitUpdate()" #f="ngForm" novalidate> 
   <input type="text" name="name" placeholder="Username" [(ngModel)]="form.name" #name="ngModel">
-  <input type="text" name="email" placeholder="Email" [(ngModel)]="form.email" #name="ngModel">
-  <input type="text" name="phone" placeholder="Phone" [(ngModel)]="form.phone" #name="ngModel">
-  <input type="text" name="address" placeholder="Address" [(ngModel)]="form.address" #name="ngModel">
+  <input type="text" name="email" placeholder="Email" [(ngModel)]="form.email" #email="ngModel">
+  <input type="text" name="phone" placeholder="Phone" [(ngModel)]="form.phone" #phone="ngModel">
+  <input type="text" name="address" placeholder="Address" [(ngModel)]="form.address" #address="ngModel">
   <input type="submit">
 </form>
-<br>
 
+<br>
+<div [style.display]="isShow ? 'block' : 'none'">
+<img id='id_imageStatus' src="{{imageStatusSrc}}" alt="{{imageStatusAlt}}" width="20" height="20">  
+<label id='id_labelStatus'> {{messageAfterUpdate}} </label>
+</div>  
+<br>

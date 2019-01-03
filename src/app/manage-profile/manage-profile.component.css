@@ -2,7 +2,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 22em;
+    height: 11em;
+}
+
+div {
+    text-align: center;
 }
 
 #updateForm * {
