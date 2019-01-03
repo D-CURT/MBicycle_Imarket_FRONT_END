@@ -47,12 +47,12 @@ export class RegistrationComponent implements OnInit {
           console.log('[Registration] Point Entry IN res: response');
           //if (res.status==200) {
             console.log('Registration Successfull');
+            this.isRegistred=true;
+            this.getService.isLogged = true;
+            this.navBarComp.isLogged = true;
             (async () => {  
               await new Promise((resolve) => setTimeout(() => resolve(), 4000));
               this.router.navigateByUrl("/index"); 
-              this.isRegistred=true;
-              this.getService.isLogged = true;
-              this.navBarComp.isLogged = true;
             })();
           //}
         },
