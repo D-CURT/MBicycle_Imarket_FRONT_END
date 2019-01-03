@@ -1,0 +1,18 @@
+#updateForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 11em;
+}
+
+div {
+    text-align: center;
+}
+
+#updateForm * {
+    margin: auto;
+}
+
+h4 {
+    text-align: center;
+}
