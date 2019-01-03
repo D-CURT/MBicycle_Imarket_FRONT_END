@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductGetterService } from '../product-getter.service';
+import { ProductGetterService } from '../services/product-getter.service';
 
 @Component({
   selector: 'app-products',

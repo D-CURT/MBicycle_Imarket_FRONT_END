@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductGetterService } from '../product-getter.service';
+import { ProductGetterService } from '../services/product-getter.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({

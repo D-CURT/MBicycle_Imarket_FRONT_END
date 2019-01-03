@@ -9,23 +9,30 @@ import { HttpClient } from '@angular/common/http'
 export class ManageComponent implements OnInit {
   form: any = {};
   files: any;
+  group: string;
 
-  categories = [
-    {
-      name: 'first',
-      groups: [{name: '1'}, {name: '2'}, {name: '1'}]
-    },
-    {
-      name: 'second',
-      groups: [{name: '6'}, {name: '6'}, {name: '6'}]
-    }
-  ]
+  // categories = [
+  //   {
+  //     name: 'first',
+  //     groups: [{name: '1'}, {name: '2'}, {name: '1'}]
+  //   },
+  //   {
+  //     name: 'second',
+  //     groups: [{name: '6'}, {name: '6'}, {name: '6'}]
+  //   }
+  // ]
+
+  categories: any;
+
   items: any;
 
   constructor(private http: HttpClient) { 
  }
 
   ngOnInit() {
+    this.http.get('/categories/allCategoriesSortedByName').subscribe(data=>{
+      this.categories = data;
+    })
   }
 
   addImage(event) {
@@ -43,11 +50,11 @@ export class ManageComponent implements OnInit {
         }
 
         formData.append('data', JSON.stringify(this.form));
-        
         final_data = formData;
+
     } else {
         //Если нет файла, то слать как обычный JSON
-        final_data = this.form;
+          final_data = this.form;
     }
 
     this.http.post('/products/add', final_data).subscribe(resp => {

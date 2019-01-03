@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Observable} from 'rxjs';
-import { ProductGetterService } from '../product-getter.service';
+import { ProductGetterService } from '../services/product-getter.service';
 import { getDefaultService } from 'selenium-webdriver/chrome';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { SearchComponent } from '../search/search.component';

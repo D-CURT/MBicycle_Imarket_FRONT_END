@@ -4,9 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SearchComponent } from '../search/search.component';
 
 import {Globals} from '../globals'
-import { ProductGetterService } from '../product-getter.service';
+import { ProductGetterService } from '../services/product-getter.service';
 import { RegistrationComponent } from '../registration/registration.component';
-import { CartService } from '../cart.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-nav-bar',

@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductGetterService } from './product-getter.service';
+import { ProductGetterService } from './services/product-getter.service';
 import { ProductsComponent } from './products/products.component';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
 
   categories: any;
 
+  roles: any;
+
    constructor(
      private httpService: HttpClient,
      private getService: ProductGetterService,
@@ -28,7 +30,11 @@ export class AppComponent implements OnInit {
     this.httpService.get('/categories/allCategoriesSortedByName').subscribe(data=>{
       this.categories = data;
     })
-  
+
+    this.httpService.get('/roles/currentRole').subscribe(data=> {
+      this.roles = data;
+    })
+ 
   }
 
   pushGroupName() {

@@ -1,21 +1,28 @@
 <h4>Manage page</h4>
 <form id="addForm" (ngSubmit)="f.form.valid && submitRegister()" #f="ngForm" novalidate> 
   <input type="text" name="name" placeholder="Product name" [(ngModel)]="form.name" #name="ngModel">
+  <input type="text" name="discount" placeholder="Discount" [(ngModel)]="form.discount" #name="ngModel">
   
-  <div>
-    <ul *ngFor="let category of categories">
-      <li (click)="this.items = this.category.groups">{{ category.name }}</li>
-    </ul>
-    <ul *ngFor="let item of items">
-      <li>{{item.name}}</li>
-    </ul>
+  <div class="navigation">
+    <div>
+      <ul class="categories"><span>Choose category</span>
+        <li (click)="this.items = this.category.groups"  *ngFor="let category of categories">{{ category.name }}</li>
+      </ul>
+    </div>
+
+    <div class="groups-chooseing">
+      <ul class="groups" *ngFor="let item of items">
+        <li (click)="this.form.group = this.item.name">{{item.name}}</li>
+      </ul>
+    </div>
   </div>
+  <span>Choosen group - {{ form.group }}</span>
   
   <!-- <input type="text" name="category" placeholder="Product category" [(ngModel)]="form.category" #category="ngModel">
   <input type="text" name="group" placeholder="Product group" [(ngModel)]="form.group" #group="ngModel"> -->
   <input type="file" name="image" (change)="addImage($event)">
   <textarea name="description" id="description" cols="30" rows="10" [(ngModel)]="form.description" #description="ngModel"></textarea>
-  <input type="submit">
+  <input type="submit" value="Add product">
 </form>
 <br>
 

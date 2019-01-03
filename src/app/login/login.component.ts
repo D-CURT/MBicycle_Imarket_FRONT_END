@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductGetterService } from '../product-getter.service';
+import { ProductGetterService } from '../services/product-getter.service';
 import { NavBarComponent} from '../nav-bar/nav-bar.component';
 import { SearchComponent } from '../search/search.component';
+import { CurrentRoleService } from '../services/current-role.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ import { SearchComponent } from '../search/search.component';
 export class LoginComponent implements OnInit {
 
   model: any = {};
+  roles: any;
 
   isLogged: boolean; 
   isError: boolean;
@@ -25,7 +27,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private getService: ProductGetterService,
-    private navBarComponent: NavBarComponent
+    private navBarComponent: NavBarComponent,
+    private role: CurrentRoleService
     ) { }
 
   ngOnInit() {
@@ -58,11 +61,17 @@ export class LoginComponent implements OnInit {
             this.getService.isLogged = true;
             this.navBarComponent.setIsLogged(true);
             this.navBarComponent.isLogged = true;
-           (async () => {  
+
+            (async () => {  
               await new Promise((resolve) => setTimeout(() => resolve(), 2000));
               console.log('After set, isLog = ' + this.isLogged + ' | and getService.isLog = ' + this.getService.isLogged + " | and navBarComp.isLog = " + this.navBarComponent.isLogged);  
               this.router.navigateByUrl("/index"); 
             })();
+            
+            this.http.get('/roles/currentRole').subscribe(data=> {
+              this.roles = data;
+              this.role.setRoles(this.roles[0].authority);
+            });
           }
           else if (errorResponsed.status==401) {
             console.log('Login failed');
@@ -75,6 +84,5 @@ export class LoginComponent implements OnInit {
       )
 
   }
-
 
 }
