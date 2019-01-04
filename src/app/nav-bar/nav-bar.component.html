@@ -1,10 +1,32 @@
 <header>
-  <div>
-    <h3>IMarket</h3>
+  <div class="header-left">
+    <h3><a routerLink="/index">IMarket</a></h3>
   </div>
+
+  <div class = "header-center">
+    <form class="example-form">
+      <mat-form-field>
+        <input id = "searchInputId" (keypress)="searchKeyPress($event)" matInput placeholder="search" value="">
+      </mat-form-field>
+    </form>
+  </div>
+
   <div class="header-right">
-    <a routerLink="/login"><button id="signIn">Sign in</button></a>
+    <a routerLink="/login"><button id="signIn" *ngIf="!getService.isLogged">Sign in</button></a>
  
-    <a routerLink="/registration"><button id="signUp">Sign up</button></a>
-  </div>
+    <a routerLink="/registration"><button id="signUp" *ngIf="!getService.isLogged">Sign up</button></a>
+
+    <a><button class="logout" value="Logout" id="logout" (click)="logout()" *ngIf="getService.isLogged">Logout</button></a>
+    
+    <div class="cart-menu" *ngIf="getService.isLogged">
+      <a routerLink="/cart"><button (click)="onButtonCartClick()" class="go-cart-button" >Go cart and buy</button></a>
+      <br>
+      <span>{{ cartService.products.length }} purchases in your cart</span>
+    </div>
+    
+  </div> 
+
+  <button (click)='getCond()' *ngIf='isDebug'>Get isLog condition</button>
+  <button (click)='manual()' *ngIf='isDebug'>Set isLog True</button>
+
 </header>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ProductGetterService } from './services/product-getter.service';
+import {GlobalService} from './services/global.service';
 
 @Component({
   selector: 'app-root',
@@ -7,27 +9,28 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'ololo';
-  categories = [{
-    name: 'sergai',
-    groups: [{name: 'aaa'}, {name: 'ooo'}] 
-  }, {
-    name: 'xxx',
-    groups: [{name: 'ahaha'}, {name: 'lol'}]
-  },{
-    name: 'xxx',
-    groups: [{name: 'ahaha'}, {name: 'lol'}]
-  },{
-    name: 'xxx',
-    groups: [{name: 'ahaha'}, {name: 'lol'}]
-  }]
 
-   constructor(private httpService: HttpClient) {}
+  path: boolean;
+  targetGroup: string;
+  categories: any;
+
+  constructor(
+     private httpService: HttpClient,
+     private getService: ProductGetterService,
+     private global: GlobalService
+     ) {}
 
   ngOnInit() {
-    
+    this.httpService.get('/categories/allCategoriesSortedByName').subscribe(data => {
+      this.categories = data;
+    });
+   }
+
+  pushGroupName() {
+    this.getService.groupName = this.targetGroup;
+    this.path = !this.path;
+    console.log('push method end');
   }
-  
 }
 
 

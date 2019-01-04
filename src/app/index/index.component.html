@@ -1,18 +1,25 @@
-<form class="example-form">
-  <mat-form-field>
-    <input matInput placeholder="search" value="">
-  </mat-form-field>
-</form>
+<div class = "filters">
+  <br>
+  <mat-checkbox class = "checkbox" [(ngModel)]="checkBoxFilterApply" (change)="onAnyCheckboxChange()">Активировать фильтр</mat-checkbox>
+  <mat-checkbox class = "checkbox" [(ngModel)]="checkBoxStoreStatus"  [disabled]="!checkBoxFilterApply" (change)="onAnyCheckboxChange()">Есть в наличии</mat-checkbox>
+  <mat-checkbox class = "checkbox" [(ngModel)]="checkBoxWithDiscount" [disabled]="!checkBoxFilterApply" (change)="onAnyCheckboxChange()">Со скидкой</mat-checkbox>
+  <br>
+  <br>
+</div>
+
+<a routerLink="/manage" *ngIf="roles.isManager"><button>manage this shit</button></a>
+<a routerLink="/manage-profile"><button>manage this profile</button></a>
 
 <div class="product" *ngFor="let product of products">
     <figure>
-      <img src="images/product-image.png" alt="product-image">
+      <img src="assets/images/default.png" alt="product-image">
       <figcaption>{{ product.price }}$</figcaption>
     </figure>
     <div class="product-description">
-      <h4>{{ product.name }}</h4>
-      <p>{{ product.descriptionPreviev }}</p>
+      <a routerLink="/product" (click)="item=product;pushProductInfo()"><h4>{{ product.name }}</h4></a>
+      <p>{{ product.descriptionPreview }}</p>
       <p>{{ product.storeStatus }}</p>
+      <p>Скидка: {{ product.discount }}</p>
     </div>
 </div>
 

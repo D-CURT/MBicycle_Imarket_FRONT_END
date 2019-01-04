@@ -1,47 +1,18 @@
 <app-nav-bar></app-nav-bar>
-<!--
+
 <div class="menu-outer">
-  <div class="inner">
-      <button mat-button [matMenuTriggerFor]="aaa" class="menu-button">Ololo purchases</button>
-      <mat-menu #aaa="matMenu">
-        <a routerLink="/roofs"><button mat-menu-item>roofs</button></a>
-        <a routerLink="/cats"><button mat-menu-item>cats</button></a>
-        <a routerLink="/dogs"><button mat-menu-item>dogs</button></a>
-    </mat-menu>
-  
-      <button mat-button [matMenuTriggerFor]="bbb" class="menu-button">BBB</button>
-      <mat-menu #bbb="matMenu">
-        <button mat-menu-item>unique item</button>
-        <button mat-menu-item>unique item</button>
-        <button mat-menu-item>unique item</button>
-        <button mat-menu-item>unique item</button>
-      </mat-menu>
-  
-      <button mat-button [matMenuTriggerFor]="ccc" class="menu-button">CCC</button>
-      <mat-menu #ccc="matMenu">
-        <button mat-menu-item>unique item</button>
-        <button mat-menu-item>unique item</button>
-      </mat-menu>
-  
-      <button mat-button [matMenuTriggerFor]="ddd" class="menu-button">DDD</button>
-      <mat-menu #ddd="matMenu">
-        <button mat-menu-item>unique item</button>
-      </mat-menu>
-        
-    </div>
+  <ul class="menu" *ngFor="let category of categories">
+      <li><a>{{ category.name }}</a>
+          <ul class="submenu">
+            <div *ngFor="let group of category.groups">
+              <li>
+                <a routerLink="/products" (click)="targetGroup = this.group.name; pushGroupName()" *ngIf="path">{{ group.name }}</a>
+                <a routerLink="/products_1" (click)="targetGroup = this.group.name; pushGroupName()" *ngIf="!path">{{ group.name }}</a>
+              </li>
+            </div>
+          </ul>
+      </li>
+  </ul>
 </div>
-    -->
-    <div class="menu-outer">
-      <div class="menu-inner" *ngFor="let category of categories">
-        <span>{{ category.name }}</span>
-          <select>
-              <a routerLink=""><option *ngFor="let group of category.groups">{{ group.name }}</option></a>
-          </select>
-      </div>
-    </div>
-
-
-<a routerLink="/manage"><button>manage this shit</button></a>
 
 <router-outlet></router-outlet>
-
