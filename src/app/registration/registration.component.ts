@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import {Observable} from 'rxjs';
-import { ProductGetterService } from '../product-getter.service';
-import { getDefaultService } from 'selenium-webdriver/chrome';
+import { ProductGetterService } from '../services/product-getter.service';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { SearchComponent } from '../search/search.component';
+import {GlobalService} from '../services/global.service';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +16,7 @@ export class RegistrationComponent implements OnInit {
 
   model: any = {};
 
-  isRegistred: boolean; 
+  isRegistred: boolean;
   isError: boolean;
 
   constructor(
@@ -25,7 +24,8 @@ export class RegistrationComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private getService: ProductGetterService,
-    private navBarComp: NavBarComponent
+    private navBarComp: NavBarComponent,
+    private global: GlobalService
     ) { }
 
   ngOnInit() {
@@ -59,12 +59,11 @@ export class RegistrationComponent implements OnInit {
         (error) => {
           let errorResponsed = error as Response;
           console.log('Error status (response) = ' + errorResponsed.status);
-          if (errorResponsed.status==409) {
+          if (errorResponsed.status === 409) {
             console.log('Registration failed. User with such username is already exists. Try another.');
             document.getElementById("errorText").innerText  = "   Registration failed. User with such username is already exists. Try another.";
-            this.isError=true;
-          }
-          else {
+            this.isError = true;
+          } else {
             console.log('Unknown registration error: ' + errorResponsed.status);
           }
         }
