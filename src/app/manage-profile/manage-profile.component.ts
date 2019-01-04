@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {GlobalService} from '../services/global.service';
 
 @Component({
   selector: 'app-manage-profile',
@@ -13,11 +14,13 @@ export class ManageProfileComponent implements OnInit {
   isUpdated: boolean;
   messageAfterUpdate: any;
   isShow: boolean;
-  imageStatusSrc : String;
-  imageStatusAlt : String;
+  imageStatusSrc: String;
+  imageStatusAlt: String;
 
-  constructor(private http: HttpClient) { 
-  }
+  constructor(
+    private http: HttpClient,
+    private global: GlobalService
+              ) {}
 
   ngOnInit() {
     
@@ -56,17 +59,16 @@ export class ManageProfileComponent implements OnInit {
           resolve();
         },
         (error) => {
-          let errorResponsed = error as Response;
+          const errorResponsed = error as Response;
           console.log('Error status (response) = ' + errorResponsed.status +' (' + errorResponsed.statusText + ')');
-          if (errorResponsed.status==204) {
+          if (errorResponsed.status === 204) {
             console.log('[Profile Update] Update failed = Server Internal Error');
             this.messageAfterUpdate = '   Update failed = Server Internal Error';
-            this.isUpdated=false;
-          }
-          else {
+            this.isUpdated = false;
+          } else {
             console.log('[Profile Update] Update failed = Unknown reason');
             this.messageAfterUpdate = '   Update failed = Unknown reason';
-            this.isUpdated=false;
+            this.isUpdated = false;
           }
           reject(error);
         }

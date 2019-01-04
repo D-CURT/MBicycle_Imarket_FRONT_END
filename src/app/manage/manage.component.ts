@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import {GlobalService} from '../services/global.service';
 
 @Component({
   selector: 'app-manage',
@@ -26,24 +27,26 @@ export class ManageComponent implements OnInit {
 
   items: any;
 
-  constructor(private http: HttpClient) { 
- }
+  constructor(
+    private http: HttpClient,
+    private global: GlobalService
+    ) {}
 
   ngOnInit() {
-    this.http.get('/categories/allCategoriesSortedByName').subscribe(data=>{
+    this.http.get('/categories/allCategoriesSortedByName').subscribe(data => {
       this.categories = data;
-    })
+    });
   }
 
   addImage(event) {
-    let target = event.target || event.srcElement;
+    const target = event.target || event.srcElement;
     this.files = target.files;
   }
 
   submitRegister() {
     let final_data;
     if (this.files) {
-        let files: FileList = this.files;
+        const files: FileList = this.files;
         const formData = new FormData();
         for (let i = 0; i < files.length; i++) {
             formData.append('photo', files[i]);
@@ -59,6 +62,6 @@ export class ManageComponent implements OnInit {
 
     this.http.post('/products/add', final_data).subscribe(resp => {
       console.log('ueeeeeeeeee');
-    })
+    });
   }
 }

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SearchComponent } from '../search/search.component';
 
-import {Globals} from '../globals'
 import { ProductGetterService } from '../services/product-getter.service';
-import { RegistrationComponent } from '../registration/registration.component';
 import { CartService } from '../services/cart.service';
+import {GlobalService} from '../services/global.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,7 +15,6 @@ import { CartService } from '../services/cart.service';
 })
 export class NavBarComponent implements OnInit {
 
-  MyCtrl : any;
   isLogged: boolean;
   isDebug: boolean;
 
@@ -25,10 +23,9 @@ export class NavBarComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private searchComp: SearchComponent,
-    private globals: Globals,
     public getService: ProductGetterService,
-    public cartService: CartService
+    public cartService: CartService,
+    private global: GlobalService
     ) { }
 
   ngOnInit() {
@@ -40,7 +37,7 @@ export class NavBarComponent implements OnInit {
 
   getCond() {
     console.log('isLog = ' + this.isLogged);
-    console.log('while this.getService.isLog = '+ this.getService.isLogged);
+    console.log('while this.getService.isLog = ' + this.getService.isLogged);
   }
 
   setIsLogged(cond: boolean) {
@@ -53,7 +50,6 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     console.log('[Logout] Trying to logout...');
-    //window.location.href='/logout';
     this.http.get('/logout')
     .subscribe (
       (res: Response) => {
@@ -63,7 +59,6 @@ export class NavBarComponent implements OnInit {
         let errorResponsed = error as Response;
         if(errorResponsed.url.endsWith('logoutdone')) {
           console.log('[Logout] Server Redirects, therefore logout is successfull.');
-          //TODO: Maybe somehow show a popup message that logout is successfull
           this.getService.isLogged = false;
           this.isLogged = false;
           this.router.navigateByUrl('/index');
@@ -73,18 +68,9 @@ export class NavBarComponent implements OnInit {
   }
 
   searchKeyPress(event) {
-    if(event.key == 'Enter') {
+    if(event.key === 'Enter') {
       document.getElementById('searchInputId').blur();  //Unfocus search input to prevent multiple queries at one moment
-      //if(this.router.url!='/search') {
-        //this.router.navigate(['/search']);
-      //}
-      //this.searchComp.ngOnInit();
-      this.router.navigateByUrl('/index', {skipLocationChange: true}).then(()=>this.router.navigate(["/search"])); //Костыль для перезагрузки данных
+       this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(["/search"])); //Костыль для перезагрузки данных
     }
   }
-
-  onButtonCartClick() {
-   
-  }
-
 }

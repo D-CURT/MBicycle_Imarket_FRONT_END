@@ -10,7 +10,7 @@ import { CartService } from '../services/cart.service';
 export class CartComponent implements OnInit {
 
   purchases: any;
-  total: number=0;
+  total = 0;
 
   products: any;
   // products: any = [{

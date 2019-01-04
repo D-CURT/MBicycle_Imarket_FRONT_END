@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductGetterService } from '../services/product-getter.service';
+import {GlobalService} from '../services/global.service';
 
 @Component({
   selector: 'app-products',
@@ -16,6 +17,7 @@ export class ProductsComponent implements OnInit {
   constructor(
     private getService: ProductGetterService,
     private http: HttpClient,
+    private global: GlobalService
     ) {  }
 
   ngOnInit() {

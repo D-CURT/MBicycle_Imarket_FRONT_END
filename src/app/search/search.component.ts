@@ -1,7 +1,7 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductGetterService } from '../services/product-getter.service';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import {GlobalService} from '../services/global.service';
 
 @Component({
   selector: 'app-search',
@@ -16,16 +16,15 @@ export class SearchComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private getService: ProductGetterService,
-    private router: Router,
-    private route: ActivatedRoute,
+    private global: GlobalService
     ) { }
 
   ngOnInit() {
     console.log('[SearchComponent.ngOnInit] Updating Search...');
-    var searchStr = ((document.getElementById("searchInputId") as HTMLInputElement).value);
+    const searchStr = ((document.getElementById("searchInputId") as HTMLInputElement).value);
     this.http.get('/products/allProductsSortedByNameWithNameLikeIgnoreCase/' + searchStr).subscribe(data => {
       this.products = data;
-    })
+    });
 
   }
 
