@@ -8,6 +8,7 @@ import { ProductsComponent } from './products/products.component';
 import { SearchComponent } from './search/search.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartComponent } from './cart/cart.component';
+import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 
 const routes: Routes = [  
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
 {
   path: 'cart',
   component: CartComponent
+},
+{
+  path: 'manage-profile',
+  component: ManageProfileComponent
 }];
 
 @NgModule({
