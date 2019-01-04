@@ -51,6 +51,11 @@ export class CartComponent implements OnInit {
     let body = {productsIds: [id]};
     this.http.post('/orders/deleteProduct', body).subscribe((res: Response) => {
       console.log(res.status);
-    })
+    });
+    for (let i in this.products) {
+      if (this.products[i].id === id) {
+        this.products.splice(i, 1);
+      }
+    }
   }
 }
