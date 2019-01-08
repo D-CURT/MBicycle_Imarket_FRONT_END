@@ -14,4 +14,6 @@
     <p>{{ product.description }}</p>
     <p>Скидка: {{ product.discount }}</p>
   </div>
+  <br>
+  <button *ngIf="roles.isManager" (click)="onEditProductClick()">Edit product</button>
 </div>
