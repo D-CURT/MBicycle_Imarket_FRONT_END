@@ -24,7 +24,7 @@ export class ProductsComponent implements OnInit {
     
     console.log('initialize');
 
-    this.products = this.http.get('/products/allProductsWithGroupSortedByName/' + this.getService.groupName).subscribe(data => {
+    this.products = this.http.get(this.global.host + '/products/allProductsWithGroupSortedByName/' + this.getService.groupName).subscribe(data => {
       this.products = data;
       console.log("inside http client");
     }) 

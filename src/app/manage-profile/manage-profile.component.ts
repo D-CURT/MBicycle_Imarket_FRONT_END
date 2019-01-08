@@ -30,7 +30,7 @@ export class ManageProfileComponent implements OnInit {
     this.imageStatusSrc = 'assets/images/accept1.png';
     this.imageStatusAlt = '123';
     
-    this.http.get('/profiles/get').subscribe(
+    this.http.get(this.global.host + '/profiles/get').subscribe(
       data => {
         this.form = data;
         console.log('[Profile Get]: Successfull');
@@ -51,7 +51,7 @@ export class ManageProfileComponent implements OnInit {
 
   doUpdate() {
     return new Promise((resolve, reject) => {
-      this.http.post('/profiles/update', this.form).subscribe(
+      this.http.post(this.global.host + '/profiles/update', this.form).subscribe(
         (resp: Response) => {
           console.log('[Profile Update]: Profile updated.' );
           this.messageAfterUpdate = '   Profile updated.';

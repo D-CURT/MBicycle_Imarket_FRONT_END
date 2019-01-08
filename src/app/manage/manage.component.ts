@@ -33,7 +33,7 @@ export class ManageComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    this.http.get('/categories/allCategoriesSortedByName').subscribe(data => {
+    this.http.get(this.global.host + '/categories/allCategoriesSortedByName').subscribe(data => {
       this.categories = data;
     });
   }
@@ -60,7 +60,7 @@ export class ManageComponent implements OnInit {
           final_data = this.form;
     }
 
-    this.http.post('/products/add', final_data).subscribe(resp => {
+    this.http.post(this.global.host + '/products/add', final_data).subscribe(resp => {
       console.log('ueeeeeeeeee');
     });
   }

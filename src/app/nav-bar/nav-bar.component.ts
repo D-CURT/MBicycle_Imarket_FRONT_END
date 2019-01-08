@@ -50,7 +50,7 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     console.log('[Logout] Trying to logout...');
-    this.http.get('/logout')
+    this.http.get(this.global.host + '/logout')
     .subscribe (
       (res: Response) => {
         console.log('[Logout] Some response: ' + res.text);

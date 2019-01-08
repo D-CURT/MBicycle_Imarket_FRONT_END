@@ -22,7 +22,7 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     console.log('[SearchComponent.ngOnInit] Updating Search...');
     const searchStr = ((document.getElementById("searchInputId") as HTMLInputElement).value);
-    this.http.get('/products/allProductsSortedByNameWithNameLikeIgnoreCase/' + searchStr).subscribe(data => {
+    this.http.get(this.global.host + '/products/allProductsSortedByNameWithNameLikeIgnoreCase/' + searchStr).subscribe(data => {
       this.products = data;
     });
 

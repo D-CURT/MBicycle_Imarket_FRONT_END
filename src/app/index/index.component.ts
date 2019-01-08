@@ -43,7 +43,7 @@ export class IndexComponent implements OnInit {
     this.checkBoxFilterApply = false;
     this.checkBoxStoreStatus = true;
     this.checkBoxWithDiscount = false;
-    this.http.get('/products/allProductsSortedByName').subscribe(data => {
+    this.http.get(this.global.host + '/products/allProductsSortedByName').subscribe(data => {
       this.products = data;
     });
   }
@@ -53,31 +53,31 @@ export class IndexComponent implements OnInit {
     if (this.checkBoxFilterApply === true) {
 
       if (this.checkBoxStoreStatus === false && this.checkBoxWithDiscount === false ) {
-        this.http.get('/products/allProductsWithStoreStatusIsFalseAndDiscountIsNullOrderByName').subscribe(data => {
+        this.http.get(this.global.host + '/products/allProductsWithStoreStatusIsFalseAndDiscountIsNullOrderByName').subscribe(data => {
           this.products = data;
         });
       }
 
       if (this.checkBoxStoreStatus === true && this.checkBoxWithDiscount === false ) {
-        this.http.get('/products/allProductsWithStoreStatusIsTrueAndDiscountIsNullOrderByName').subscribe(data => {
+        this.http.get(this.global.host + '/products/allProductsWithStoreStatusIsTrueAndDiscountIsNullOrderByName').subscribe(data => {
           this.products = data;
         });
       }
 
       if (this.checkBoxStoreStatus === false && this.checkBoxWithDiscount === true ) {
-        this.http.get('/products/allProductsWithStoreStatusIsFalseAndDiscountIsNotNullOrderByName').subscribe(data => {
+        this.http.get(this.global.host + '/products/allProductsWithStoreStatusIsFalseAndDiscountIsNotNullOrderByName').subscribe(data => {
           this.products = data;
         });
       }
 
       if (this.checkBoxStoreStatus === true && this.checkBoxWithDiscount === true ) {
-        this.http.get('/products/allProductsWithStoreStatusIsTrueAndDiscountIsNotNullOrderByName').subscribe(data => {
+        this.http.get(this.global.host + '/products/allProductsWithStoreStatusIsTrueAndDiscountIsNotNullOrderByName').subscribe(data => {
           this.products = data;
         });
       }
 
     } else {
-      this.http.get('/products/allProductsSortedByName').subscribe(data => {
+      this.http.get(this.global.host + '/products/allProductsSortedByName').subscribe(data => {
         this.products = data;
       });
     }

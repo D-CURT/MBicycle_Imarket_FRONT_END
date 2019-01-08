@@ -34,8 +34,7 @@ export class ProductPageComponent implements OnInit {
   addingToCart() {
     this.productsss.push(this.getService.product.id)
     const body = {productsIds: this.productsss}
-    this.cartService.addProduct(this.getService.product.id);
-    this.http.post('/orders/add', body).subscribe(
+    this.http.post(this.global.host + '/orders/add', body).subscribe(
       (res: Response) => {
         console.log(res.status);
       }

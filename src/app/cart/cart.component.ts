@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../services/cart.service';
+import {GlobalService} from '../services/global.service';
 
 @Component({
   selector: 'app-cart',
@@ -34,12 +35,13 @@ export class CartComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private cartService: CartService
+    private cartService: CartService,
+    private global: GlobalService
     ) { }
 
   ngOnInit() {
     this.purchases = this.cartService.products;
-    this.http.get('/orders/products').subscribe(data => {
+    this.http.get(this.global.host + '/orders/products').subscribe(data => {
       this.products = data;
       this.products.forEach(product => {
         this.total += parseInt(product.price);
@@ -49,7 +51,7 @@ export class CartComponent implements OnInit {
 
   remove(id) {
     const body = {productsIds: [id]};
-    this.http.post('/orders/deleteProduct', body).subscribe((res: Response) => {
+    this.http.post(this.global.host + '/orders/deleteProduct', body).subscribe((res: Response) => {
       console.log(res.status);
     });
     for (let i in this.products) {

@@ -21,6 +21,7 @@ import { SearchComponent } from './search/search.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartComponent } from './cart/cart.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
+import { AdminsWorkComponent } from './admins-work/admins-work.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ManageProfileComponent } from './manage-profile/manage-profile.componen
     SearchComponent,
     ProductPageComponent,
     CartComponent,
-    ManageProfileComponent
+    ManageProfileComponent,
+    AdminsWorkComponent
   ],
   imports: [
     BrowserModule,

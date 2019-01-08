@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
     private getService: ProductGetterService,
     private navBarComponent: NavBarComponent,
     private role: CurrentRoleService,
+    private global: GlobalService
     ) { }
 
   ngOnInit() {}
@@ -37,10 +38,9 @@ export class LoginComponent implements OnInit {
     const usr: string = this.model.username;
     const pas: string = this.model.password;
     let headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append("Authorization", "Basic " + btoa(usr + ":" + pas)); 
+    headers = headers.append("Authorization", "Basic " + btoa(usr + ":" + pas));
     headers = headers.append("Content-Type", "application/x-www-form-urlencoded");
-    this.http.post( '/login', null, {headers: headers})
-    
+    this.http.post( this.global.host + '/login', null, {headers: headers})
       .subscribe (
         (res: Response) => {
           console.log('[Login] Point Entry IN res: response');
@@ -55,12 +55,12 @@ export class LoginComponent implements OnInit {
             this.navBarComponent.setIsLogged(true);
             this.navBarComponent.isLogged = true;
 
-            (async () => {  
+            (async () => {
               await new Promise((resolve) => setTimeout(() => resolve(), 2000));
-              console.log('After set, isLog = ' + this.isLogged + ' | and getService.isLog = ' + this.getService.isLogged + " | and navBarComp.isLog = " + this.navBarComponent.isLogged);  
+              console.log('After set, isLog = ' + this.isLogged + ' | and getService.isLog = ' + this.getService.isLogged + " | and navBarComp.isLog = " + this.navBarComponent.isLogged);
               this.router.navigateByUrl("/index");
             })();
-            this.http.get('/roles/currentRole').subscribe(data => {
+            this.http.get(this.global.host + '/roles/currentRole').subscribe(data => {
               this.role.setRoles(data[0].authority);
             });
           } else if (errorResponsed.status === 401) {

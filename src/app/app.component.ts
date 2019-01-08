@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
      ) {}
 
   ngOnInit() {
-    this.httpService.get('/categories/allCategoriesSortedByName').subscribe(data => {
+    this.httpService.get(this.global.host + '/categories/allCategoriesSortedByName').subscribe(data => {
       this.categories = data;
     });
    }

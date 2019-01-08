@@ -40,7 +40,7 @@ export class RegistrationComponent implements OnInit {
     let tosend = this.model.login + this.model.password;
 
     const options = {headers: {'Content-Type': 'application/json'}};
-    this.http.post('/registration', this.model, options)
+    this.http.post(this.global.host + '/registration', this.model, options)
       .subscribe(
       
         (res: Response) => {

@@ -9,53 +9,58 @@ import { SearchComponent } from './search/search.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartComponent } from './cart/cart.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
+import {AdminsWorkComponent} from './admins-work/admins-work.component';
 
 const routes: Routes = [
   {
-  path: 'index',
-  component: IndexComponent,
-  data: { title: 'Our products' },
-},
-{ path: '',
-  redirectTo: '/index',
-  pathMatch: 'full'
-},
-{
-  path: 'manage',
-  component: ManageComponent
-},
-{
-  path: 'login',
-  component: LoginComponent
-},
-{
-  path: 'products',
-  component: ProductsComponent
-},
-{
-  path: 'products_1',
-  component: ProductsComponent
-},
-{
-  path: 'registration',
-  component: RegistrationComponent
-},
-{
-  path: 'search',
-  component: SearchComponent
-},
-{
-  path: 'product',
-  component: ProductPageComponent
-},
-{
-  path: 'cart',
-  component: CartComponent
-},
-{
-  path: 'manage-profile',
-  component: ManageProfileComponent
-}];
+    path: 'index',
+    component: IndexComponent,
+    data: { title: 'Our products' },
+  },
+  { path: '',
+    redirectTo: '/index',
+    pathMatch: 'full'
+  },
+  {
+    path: 'manage',
+    component: ManageComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'products',
+    component: ProductsComponent
+  },
+  {
+    path: 'products_1',
+    component: ProductsComponent
+  },
+  {
+    path: 'registration',
+    component: RegistrationComponent
+  },
+  {
+    path: 'search',
+    component: SearchComponent
+  },
+  {
+    path: 'product',
+    component: ProductPageComponent
+  },
+  {
+    path: 'cart',
+    component: CartComponent
+  },
+  {
+    path: 'manage-profile',
+    component: ManageProfileComponent
+  },
+  {
+    path: 'angry-admin',
+    component: AdminsWorkComponent
+  }];
 
 @NgModule({
   imports: [
