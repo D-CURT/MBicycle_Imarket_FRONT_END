@@ -19,7 +19,7 @@
     <a><button class="logout" value="Logout" id="logout" (click)="logout()" *ngIf="getService.isLogged">Logout</button></a>
     
     <div class="cart-menu" *ngIf="getService.isLogged">
-      <a routerLink="/cart"><button (click)="onButtonCartClick()" class="go-cart-button" >Go cart and buy</button></a>
+      <a routerLink="/cart"><button class="go-cart-button" >Go cart and buy</button></a>
       <br>
       <span>{{ cartService.products.length }} purchases in your cart</span>
     </div>
