@@ -1,5 +1,4 @@
 <app-nav-bar></app-nav-bar>
-
 <div class="menu-outer">
   <ul class="menu" *ngFor="let category of categories">
       <li><a>{{ category.name }}</a>
@@ -14,5 +13,5 @@
       </li>
   </ul>
 </div>
-
+<a routerLink="/coupon"><button>coupons</button></a>
 <router-outlet></router-outlet>

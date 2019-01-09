@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductGetterService } from './services/product-getter.service';
 import {GlobalService} from './services/global.service';
@@ -9,7 +9,6 @@ import {GlobalService} from './services/global.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
   path: boolean;
   targetGroup: string;
   categories: any;
