@@ -10,6 +10,7 @@
 <a routerLink="/manage" *ngIf="roles.isManager"><button>manage this shit</button></a>
 <a routerLink="/manage-profile"><button>manage this profile</button></a>
 <a routerLink="/angry-admin" *ngIf="roles.isAdmin"><button>get over here</button></a>
+<button (click)="getRole()">role</button>
 
 <div class="product" *ngFor="let product of products">
     <figure>

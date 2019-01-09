@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { ProductGetterService } from '../services/product-getter.service';
 import { Router } from '@angular/router';
 import {GlobalService} from '../services/global.service';
@@ -87,4 +87,13 @@ export class IndexComponent implements OnInit {
     this.getService.product = this.item;
     console.log('information about product has been sent');
   }
+  getRole() {
+
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append("Authorization", "Basic " + btoa( "admin:123"));
+    this.http.get(this.global.host + '/roles/currentRole', {headers: headers}).subscribe(data => {
+      this.roles.setRoles(data[0].authority);
+    });
+  }
+
 }

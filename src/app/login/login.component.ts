@@ -60,9 +60,6 @@ export class LoginComponent implements OnInit {
               console.log('After set, isLog = ' + this.isLogged + ' | and getService.isLog = ' + this.getService.isLogged + " | and navBarComp.isLog = " + this.navBarComponent.isLogged);
               this.router.navigateByUrl("/index");
             })();
-            this.http.get(this.global.host + '/roles/currentRole').subscribe(data => {
-              this.role.setRoles(data[0].authority);
-            });
           } else if (errorResponsed.status === 401) {
             console.log('Login failed');
             this.isError = true;
@@ -73,5 +70,4 @@ export class LoginComponent implements OnInit {
       );
 
   }
-
 }
