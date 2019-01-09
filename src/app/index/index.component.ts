@@ -48,6 +48,11 @@ export class IndexComponent implements OnInit {
     });
   }
 
+  goToManage() {
+    this.getService.manage_editMode=false;
+    this.router.navigateByUrl('/manage');
+  }
+
   onAnyCheckboxChange() {
 
     if (this.checkBoxFilterApply === true) {

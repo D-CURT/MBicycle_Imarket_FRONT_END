@@ -41,10 +41,11 @@ export class ManageComponent implements OnInit {
     }
 
   ngOnInit() {
-
-    this.product = this.getService.product;
-    if (this.getService.product.id != null) {
-      this.editMode = true;
+    console.log('ngOnInit(), editMode = ' + this.editMode)
+    this.editMode = this.getService.manage_editMode;
+    console.log('after get service, editMode = ' + this.editMode)
+    if (this.editMode && this.getService.product.id != null) {
+      this.product = this.getService.product;
       this.http.get('/products/getById/'+this.getService.product.id).subscribe(data => {
         this.product = data;
         this.form.id=this.product.id;
@@ -56,7 +57,6 @@ export class ManageComponent implements OnInit {
         this.form.description=this.product.description;
       });
     } else {
-      this.editMode = false;
       this.http.get('/categories/allCategoriesSortedByName').subscribe(data => {
         this.categories = data;
       });

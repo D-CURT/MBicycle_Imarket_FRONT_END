@@ -49,6 +49,7 @@ export class ProductPageComponent implements OnInit {
 
   onEditProductClick() {
     this.getService.product = this.product;
+    this.getService.manage_editMode = true;
     this.router.navigateByUrl("/manage");
   }
 
