@@ -8,6 +8,7 @@ import { ProductsComponent } from './products/products.component';
 import { SearchComponent } from './search/search.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartComponent } from './cart/cart.component';
+import { CouponComponent } from './coupon/coupon.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 import {AdminsWorkComponent} from './admins-work/admins-work.component';
 
@@ -60,6 +61,10 @@ const routes: Routes = [
   {
     path: 'angry-admin',
     component: AdminsWorkComponent
+  },
+  {
+    path: 'coupon',
+    component: CouponComponent
   }];
 
 @NgModule({

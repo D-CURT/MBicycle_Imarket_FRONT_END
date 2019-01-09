@@ -1,0 +1,46 @@
+
+<!-- 
+  <form>
+    <div class="coupon form-group" *ngFor="let coupon of coupons">
+        <span>
+        {{ coupon.description }}
+        </span>
+        <span>
+          {{ coupon.sum }}
+        </span>
+        <input type="checkbox"/> 
+        <input type="checkbox" (change)="checkbox(item)">
+    </div>
+    <button>submit</button>
+  </form> -->
+
+  <!-- <div class="coupon-description">
+  <span>
+    {{ coupon.description }}
+  </span>
+  <span>
+    {{ coupon.sum }}
+  </span>
+
+  <span>
+    <input type="checkbox"/> 
+  </span>
+
+  </div> -->
+
+    <!-- <div *ngFor="let coupon of coupons">
+    <span><input type="checkbox" [(ngModel)]="{{coupon}}" checked="false"> {{ coupon.description }}</span> 
+    <span><input type="checkbox" checked="false"> {{ coupon.description }}</span> 
+  </div> -->
+
+<form>
+  <mat-checkbox
+  *ngFor="let coupon of coupons"
+    name="{{ coupon.id }}"
+    (change)="updateOutput($event)">
+    {{ coupon.description }} 
+  </mat-checkbox>
+  
+</form>
+
+<button (click)="postDelete()">Удалить</button>

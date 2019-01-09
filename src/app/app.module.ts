@@ -20,6 +20,7 @@ import { SearchComponent } from './search/search.component';
 
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartComponent } from './cart/cart.component';
+import { CouponComponent } from './coupon/coupon.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 import { AdminsWorkComponent } from './admins-work/admins-work.component';
 
@@ -36,7 +37,8 @@ import { AdminsWorkComponent } from './admins-work/admins-work.component';
     ProductPageComponent,
     CartComponent,
     ManageProfileComponent,
-    AdminsWorkComponent
+    AdminsWorkComponent,
+    CouponComponent
   ],
   imports: [
     BrowserModule,
