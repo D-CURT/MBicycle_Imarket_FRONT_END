@@ -21,6 +21,7 @@ import { SearchComponent } from './search/search.component';
 import { Globals } from './globals';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartComponent } from './cart/cart.component';
+import { CouponComponent } from './coupon/coupon.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CartComponent } from './cart/cart.component';
     ProductsComponent,
     SearchComponent,
     ProductPageComponent,
-    CartComponent
+    CartComponent,
+    CouponComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,38 @@
+.coupon {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.coupon figure figcaption {
+    box-shadow: 0 0 5px 1px black;
+    margin-top: 1em;
+    text-align: center;
+}
+
+.coupon-description, figure {
+    width: 40%;
+}
+
+.coupon-description {
+    margin-right: 20%;
+}
+
+figure {
+    margin-left: 30%;
+}
+
+.example-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.example-form input {
+    margin: auto;
+}
+
+/* временно */
+div {
+    border: 1px solid black;
+}
