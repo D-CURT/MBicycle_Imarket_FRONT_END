@@ -3,6 +3,9 @@ import { ProductGetterService } from '../services/product-getter.service';
 import { CartService } from '../services/cart.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {GlobalService} from '../services/global.service';
+import {CurrentRoleService} from '../services/current-role.service';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-page',
@@ -19,7 +22,9 @@ export class ProductPageComponent implements OnInit {
     private getService: ProductGetterService,
     private cartService: CartService,
     private http: HttpClient,
-    private global: GlobalService
+    private global: GlobalService,
+    public roles: CurrentRoleService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -39,6 +44,12 @@ export class ProductPageComponent implements OnInit {
         console.log(res.status);
       }
     );
+  }
+
+  onEditProductClick() {
+    this.getService.product = this.product;
+    this.getService.manage_editMode = true;
+    this.router.navigateByUrl("/manage");
   }
 
 }
