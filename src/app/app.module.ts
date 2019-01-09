@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatInputModule} from '@angular/material/input';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
@@ -18,10 +18,10 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ProductsComponent } from './products/products.component';
 import { SearchComponent } from './search/search.component';
 
-import { Globals } from './globals';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartComponent } from './cart/cart.component';
 import { CouponComponent } from './coupon/coupon.component';
+import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import { CouponComponent } from './coupon/coupon.component';
     MatFormFieldModule,
     MatCheckboxModule
   ],
-  providers: [Globals],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

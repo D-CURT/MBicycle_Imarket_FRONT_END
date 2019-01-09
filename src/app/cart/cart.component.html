@@ -4,7 +4,7 @@
         <figure>
             <img src="assets/images/default.png" alt="product-image">
             <figcaption>{{ product.price }}$</figcaption>
-            <button (click)="remove()">Remove from cart</button>
+            <button (click)="remove( product.id )">Remove from cart</button>
         </figure>
         <div class="product-description">
             <a routerLink="/product" (click)="item=this.product;pushProductInfo()"><h4>{{ product.name }}</h4></a>

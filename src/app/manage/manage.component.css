@@ -12,3 +12,31 @@
 h4 {
     text-align: center;
 }
+
+.categorygroup {
+    text-align: center;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.navigation .categories {
+    list-style: none;
+    border: 1px solid black;
+ 
+}
+
+.navigation .categories:hover > li{
+    display: block;
+    cursor: pointer;
+}
+
+.navigation .categories li {
+    display: none;
+}
+
+
+

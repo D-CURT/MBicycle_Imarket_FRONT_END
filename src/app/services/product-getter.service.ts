@@ -10,6 +10,8 @@ export class ProductGetterService {
   isLogged: boolean;
   product: any;
 
+  manage_editMode: boolean;
+
   constructor() { }
 
 }

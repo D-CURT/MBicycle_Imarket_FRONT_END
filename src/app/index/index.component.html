@@ -7,6 +7,9 @@
   <br>
 </div>
 
+<a><button *ngIf="roles.isManager" (click)="goToManage()">manage this shit</button></a>
+<a routerLink="/manage-profile"><button>manage this profile</button></a>
+
 <div class="product" *ngFor="let product of products">
     <figure>
       <img src="assets/images/default.png" alt="product-image">

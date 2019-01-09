@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductGetterService } from '../product-getter.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ProductGetterService } from '../services/product-getter.service';
+import { Router } from '@angular/router';
+import {GlobalService} from '../services/global.service';
+import {CurrentRoleService} from '../services/current-role.service';
 
 @Component({
   selector: 'app-index',
@@ -14,6 +16,8 @@ export class IndexComponent implements OnInit {
     private http: HttpClient,
     private getService: ProductGetterService,
     private router: Router,
+    private global: GlobalService,
+    public roles: CurrentRoleService
     ) { }
 
    products: any;
@@ -39,54 +43,53 @@ export class IndexComponent implements OnInit {
     this.checkBoxFilterApply = false;
     this.checkBoxStoreStatus = true;
     this.checkBoxWithDiscount = false;
-
     this.http.get('/products/allProductsSortedByName').subscribe(data => {
       this.products = data;
     });
-    
+  }
+
+  goToManage() {
+    this.getService.manage_editMode=false;
+    this.router.navigateByUrl('/manage');
   }
 
   onAnyCheckboxChange() {
 
-    if(this.checkBoxFilterApply==true) {
+    if (this.checkBoxFilterApply === true) {
 
-      if(this.checkBoxStoreStatus==false && this.checkBoxWithDiscount==false ) {
+      if (this.checkBoxStoreStatus === false && this.checkBoxWithDiscount === false ) {
         this.http.get('/products/allProductsWithStoreStatusIsFalseAndDiscountIsNullOrderByName').subscribe(data => {
           this.products = data;
         });
       }
 
-      if(this.checkBoxStoreStatus==true && this.checkBoxWithDiscount==false ) {
+      if (this.checkBoxStoreStatus === true && this.checkBoxWithDiscount === false ) {
         this.http.get('/products/allProductsWithStoreStatusIsTrueAndDiscountIsNullOrderByName').subscribe(data => {
           this.products = data;
         });
       }
 
-      if(this.checkBoxStoreStatus==false && this.checkBoxWithDiscount==true ) {
+      if (this.checkBoxStoreStatus === false && this.checkBoxWithDiscount === true ) {
         this.http.get('/products/allProductsWithStoreStatusIsFalseAndDiscountIsNotNullOrderByName').subscribe(data => {
           this.products = data;
         });
       }
 
-      if(this.checkBoxStoreStatus==true && this.checkBoxWithDiscount==true ) {
+      if (this.checkBoxStoreStatus === true && this.checkBoxWithDiscount === true ) {
         this.http.get('/products/allProductsWithStoreStatusIsTrueAndDiscountIsNotNullOrderByName').subscribe(data => {
           this.products = data;
         });
       }
 
-    }
-    else {
+    } else {
       this.http.get('/products/allProductsSortedByName').subscribe(data => {
         this.products = data;
       });
     }
-
-    this.router.navigateByUrl('/index', {skipLocationChange: true}).then(()=>this.router.navigate(["/index"])); //Костыль для перезагрузки данных
+    this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(["/index"])); //Костыль для перезагрузки данных
   }
-  
   pushProductInfo() {
     this.getService.product = this.item;
     console.log('information about product has been sent');
   }
-
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpResponse } from '@angular/common/http'
+import {GlobalService} from '../services/global.service';
+import { ProductGetterService } from '../services/product-getter.service';
 
 @Component({
   selector: 'app-manage',
@@ -9,40 +11,93 @@ import { HttpClient } from '@angular/common/http'
 export class ManageComponent implements OnInit {
   form: any = {};
   files: any;
+  group: string;
 
-  constructor(private http: HttpClient) { 
-    this.form = {
-      name: {}
+  // categories = [
+  //   {
+  //     name: 'first',
+  //     groups: [{name: '1'}, {name: '2'}, {name: '1'}]
+  //   },
+  //   {
+  //     name: 'second',
+  //     groups: [{name: '6'}, {name: '6'}, {name: '6'}]
+  //   }
+  // ]
+
+  categories: any;
+
+  items: any;
+
+  product: any;
+
+  editMode: boolean;
+
+  constructor(
+    private getService: ProductGetterService,
+    private http: HttpClient,
+    private global: GlobalService
+    ) {
+      this.editMode = false;
     }
-  }
 
   ngOnInit() {
+    console.log('ngOnInit(), editMode = ' + this.editMode)
+    this.editMode = this.getService.manage_editMode;
+    console.log('after get service, editMode = ' + this.editMode)
+    if (this.editMode && this.getService.product.id != null) {
+      this.product = this.getService.product;
+      this.http.get('/products/getById/'+this.getService.product.id).subscribe(data => {
+        this.product = data;
+        this.form.id=this.product.id;
+        this.form.name=this.product.name;
+        this.form.price = this.product.price;
+        this.form.discount=this.product.discount;
+        this.form.storeStatus=this.product.storeStatus;
+        this.form.descriptionPreview=this.product.descriptionPreview;
+        this.form.description=this.product.description;
+      });
+    } else {
+      this.http.get('/categories/allCategoriesSortedByName').subscribe(data => {
+        this.categories = data;
+      });
+    }
+
   }
 
   addImage(event) {
-    let target = event.target || event.srcElement;
+    const target = event.target || event.srcElement;
     this.files = target.files;
   }
 
-  submitRegister() {
+  submitUpdate() {
     let final_data;
     if (this.files) {
-        let files: FileList = this.files;
+        const files: FileList = this.files;
         const formData = new FormData();
         for (let i = 0; i < files.length; i++) {
             formData.append('photo', files[i]);
         }
 
         formData.append('data', JSON.stringify(this.form));
-        
         final_data = formData;
+
     } else {
-        //Если нет файла, то слать как обычный JSON
-        final_data = this.form;
+      const formData = new FormData();
+      formData.append('data',JSON.stringify(this.form));
+      final_data = formData;
     }
 
-    this.http.post('/products/add', final_data).subscribe(resp => {
-      console.log('ueeeeeeeeee');
-    })
+    if(this.editMode) {
+      this.http.post('/products/update', final_data).subscribe(resp => {
+        console.log('[Product update response] ');
+      });
+    }
+    else {
+      this.http.post('/products/add', final_data).subscribe(resp => {
+        console.log('[Product add response] ');
+      });
+    }
+
+
   }
 }

@@ -7,6 +7,7 @@
         <p>{{ product.price }}</p>
         <p>{{ store }}</p>
         <button (click)="addingToCart()">Add to cart</button>
+        <button *ngIf="roles.isManager" (click)="onEditProductClick()">Edit product</button>
       </figcaption>
     </figure>
   </div>
@@ -14,4 +15,5 @@
     <p>{{ product.description }}</p>
     <p>Скидка: {{ product.discount }}</p>
   </div>
+  <br>
 </div>

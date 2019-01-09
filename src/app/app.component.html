@@ -1,14 +1,4 @@
 <app-nav-bar></app-nav-bar>
-<!--
-<div class="menu-outer" *ngFor="let category of categories">
-  <div class="inner">
-      <button mat-button [matMenuTriggerFor]="aaa" class="menu-button">{{ category.name }}</button>
-      <mat-menu #aaa="matMenu" *ngFor="let group of category.groups">
-        <a routerLink="/products"><button mat-menu-item>{{ group.name }}</button></a>
-      </mat-menu>
-  </div>
-</div>
--->
 <div class="menu-outer">
   <ul class="menu" *ngFor="let category of categories">
       <li><a>{{ category.name }}</a>
@@ -23,8 +13,5 @@
       </li>
   </ul>
 </div>
-
-<a routerLink="/manage"><button>manage this shit</button></a>
 <a routerLink="/coupon"><button>coupons</button></a>
-
 <router-outlet></router-outlet>

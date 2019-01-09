@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CartService } from '../cart.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,26 +10,27 @@ import { CartService } from '../cart.service';
 export class CartComponent implements OnInit {
 
   purchases: any;
-  total: number=0;
+  total: number = 0;
 
-  products: any = [{
-    price: '666',
-    name: 'unnamed',
-    descriptionPreview: 'Best product for everyone',
-    storeStatus: 'true'
-  },
-  {
-    price: '666',
-    name: 'unnamed',
-    descriptionPreview: 'Best product for everyone',
-    storeStatus: 'true'
-  },
-  {
-    price: '666',
-    name: 'unnamed',
-    descriptionPreview: 'Best product for everyone',
-    storeStatus: 'true'
-  }];
+  products: any;
+  // products: any = [{
+  //   price: '666',
+  //   name: 'unnamed',
+  //   descriptionPreview: 'Best product for everyone',
+  //   storeStatus: 'true'
+  // },
+  // {
+  //   price: '666',
+  //   name: 'unnamed',
+  //   descriptionPreview: 'Best product for everyone',
+  //   storeStatus: 'true'
+  // },
+  // {
+  //   price: '666',
+  //   name: 'unnamed',
+  //   descriptionPreview: 'Best product for everyone',
+  //   storeStatus: 'true'
+  // }];
 
   constructor(
     private http: HttpClient,
@@ -38,16 +39,23 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.purchases = this.cartService.products;
-    // this.http.get('/products/purchases').subscribe(data => {
-    //   this.products = data;
-    // })
-    this.products.forEach(product => {
-      this.total += parseInt(product.price);
+    this.http.get('/orders/products').subscribe(data => {
+      this.products = data;
+      this.products.forEach(product => {
+        this.total += parseInt(product.price);
+      });
     });
   }
 
-  remove() {
-    
+  remove(id) {
+    const body = {productsIds: [id]};
+    this.http.post('/orders/deleteProduct', body).subscribe((res: Response) => {
+      console.log(res.status);
+    });
+    for (let i in this.products) {
+      if (this.products[i].id === id) {
+        this.products.splice(i, 1);
+      }
+    }
   }
-
 }
