@@ -35,7 +35,8 @@ import { ManageProfileComponent } from './manage-profile/manage-profile.componen
     SearchComponent,
     ProductPageComponent,
     CartComponent,
-    CouponComponent
+    CouponComponent,
+    ManageProfileComponent
   ],
   imports: [
     BrowserModule,
