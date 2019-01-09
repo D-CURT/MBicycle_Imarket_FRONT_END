@@ -7,7 +7,7 @@
   <br>
 </div>
 
-<a routerLink="/manage" *ngIf="roles.isManager"><button>manage this shit</button></a>
+<a><button *ngIf="roles.isManager" (click)="goToManage()">manage this shit</button></a>
 <a routerLink="/manage-profile"><button>manage this profile</button></a>
 
 <div class="product" *ngFor="let product of products">
