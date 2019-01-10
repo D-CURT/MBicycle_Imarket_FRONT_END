@@ -23,6 +23,9 @@ import { CartComponent } from './cart/cart.component';
 import { CouponComponent } from './coupon/coupon.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { OrdersComponent } from './orders/orders.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +39,8 @@ import { ManageProfileComponent } from './manage-profile/manage-profile.componen
     ProductPageComponent,
     CartComponent,
     CouponComponent,
-    ManageProfileComponent
+    ManageProfileComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,10 @@ import { ManageProfileComponent } from './manage-profile/manage-profile.componen
     MatInputModule,
     FormsModule,
     MatFormFieldModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
