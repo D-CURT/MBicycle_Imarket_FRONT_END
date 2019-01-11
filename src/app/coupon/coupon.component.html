@@ -1,46 +1,49 @@
 
-<!-- 
-  <form>
-    <div class="coupon form-group" *ngFor="let coupon of coupons">
-        <span>
-        {{ coupon.description }}
-        </span>
-        <span>
-          {{ coupon.sum }}
-        </span>
-        <input type="checkbox"/> 
-        <input type="checkbox" (change)="checkbox(item)">
-    </div>
-    <button>submit</button>
-  </form> -->
-
-  <!-- <div class="coupon-description">
-  <span>
-    {{ coupon.description }}
-  </span>
-  <span>
-    {{ coupon.sum }}
-  </span>
-
-  <span>
-    <input type="checkbox"/> 
-  </span>
-
-  </div> -->
-
-    <!-- <div *ngFor="let coupon of coupons">
-    <span><input type="checkbox" [(ngModel)]="{{coupon}}" checked="false"> {{ coupon.description }}</span> 
-    <span><input type="checkbox" checked="false"> {{ coupon.description }}</span> 
-  </div> -->
-
-<form>
+<div *ngIf="roleService.isAdmin">
+<form *ngFor="let coupon of coupons">
   <mat-checkbox
-  *ngFor="let coupon of coupons"
     name="{{ coupon.id }}"
     (change)="updateOutput($event)">
     {{ coupon.description }} 
+    {{ coupon.sum }} 
   </mat-checkbox>
-  
+  <p></p>
 </form>
 
 <button (click)="postDelete()">Удалить</button>
+
+
+<div>
+<p><p><p><p>
+Добавление нового купона
+<p>
+
+<form name="addCuponForm" (ngSubmit)="f.form.valid && onSubmitAddCupon()" #f="ngForm" novalidate>
+
+    <input type="text" name="description" [(ngModel)]="model.description" #description="ngModel" required placeholder="Описание"/>
+    <br/><br/>
+      
+    <input type="number" name="sum" [(ngModel)]="model.sum" #sum="ngModel" required placeholder="Сумма" value="1" min="1" max="500" step="1"/>
+    <br/><br/>
+
+    <input id="submitAddCoupon" type="submit" value="Add Coupon">
+    
+  </form>
+</div>
+
+</div>
+
+
+
+
+
+
+
+<div *ngIf="roleService.isManager">
+
+    <select ui-select2 ng-model="selectedSingle" data-placeholder="-- Select One --">
+        <option></option>
+        <option ng-repeat="item in items" value="{{item.id}}">{{item.name}}</option>
+     </select>
+
+</div>
