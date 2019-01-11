@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { NavBarComponent} from '../nav-bar/nav-bar.component';
 import { SearchComponent } from '../search/search.component';
 import {HttpWorksService} from '../services/http-works.service';
+import {ElementDef} from '@angular/core/src/view';
 
 @Component({
   selector: 'app-login',
@@ -9,39 +10,58 @@ import {HttpWorksService} from '../services/http-works.service';
   styleUrls: ['./login.component.css'],
   providers: [NavBarComponent, SearchComponent]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   model: any = {};
   isError: boolean;
 
   isLogged: boolean;
-  inputLogin: HTMLInputElement;
-  inputPassword: HTMLInputElement;
-  eyeFirstLeft: HTMLElement;
-  eyeFirstRight: HTMLElement;
-  eyeSecondLeft: HTMLElement;
-  eyeSecondRight: HTMLElement;
+  inputLogin: any;
+  inputPassword: any;
+  eyeFirstLeft: any;
+  eyeFirstRight: any;
+  eyeSecondLeft: any;
+  eyeSecondRight: any;
+
+  @ViewChild('firstLeft') firstLeft: ElementRef;
+  @ViewChild('firstRight') firstRight: ElementRef;
+  @ViewChild('secondLeft') secondLeft: ElementRef;
+  @ViewChild('secondRight') secondRight: ElementRef;
+  @ViewChild('log') log: ElementRef;
+  @ViewChild('pass') pass: ElementRef;
 
   constructor(
     private httpService: HttpWorksService
     ) { }
 
-  ngOnInit() {
-    this.inputLogin = document.querySelector('.form__input--login')[0];
-    this.inputPassword = document.querySelector('.form__input--password')[0];
+  ngOnInit() {}
 
-    this.eyeFirstLeft = document.querySelector('.animation__eye--one-one')[0];
-    this.eyeFirstRight = document.querySelector('.animation__eye--one-two')[0];
+  ngAfterViewInit() {
 
-    this.eyeSecondLeft = document.querySelector('.animation__eye--two-one')[0];
-    this.eyeSecondRight = document.querySelector('.animation__eye--two-two')[0];
+    this.eyeFirstLeft = this.firstLeft;
+    this.eyeFirstRight = this.firstRight;
+    this.eyeSecondLeft = this.secondLeft;
+    this.eyeFirstRight = this.secondRight;
+    this.inputLogin = this.log;
+    this.inputPassword = this.pass;
 
-    this.inputLogin.addEventListener('input', this.inputHandler);
-    this.inputPassword.addEventListener('input', this.inputHandler);
+    this.inputLogin.nativeElement.addEventListener('focus', this.firstFocusHandler);
+    this.inputPassword.nativeElement.addEventListener('focus', this.firstFocusHandler);
 
-    this.inputLogin.addEventListener('blur', this.blurHandler);
-    this.inputPassword.addEventListener('blur', this.blurHandler);
+    this.inputLogin.nativeElement.addEventListener('input', this.inputHandler);
+    this.inputPassword.nativeElement.addEventListener('input', this.inputHandler);
 
+    this.inputLogin.nativeElement.addEventListener('blur', this.blurHandler);
+    this.inputPassword.nativeElement.addEventListener('blur', this.blurHandler);
+
+    // this.inputLogin.addEventListener('focus', this.firstFocusHandler());
+    // this.inputPassword.addEventListener('focus', this.firstFocusHandler());
+    //
+    // this.inputLogin.addEventListener('input', this.inputHandler);
+    // this.inputPassword.addEventListener('input', this.inputHandler);
+    //
+    // this.inputLogin.addEventListener('blur', this.blurHandler);
+    // this.inputPassword.addEventListener('blur', this.blurHandler);
   }
 
   login() {
@@ -51,17 +71,13 @@ export class LoginComponent implements OnInit {
    }
   }
 
-  firstFocusHandler() {
+  public firstFocusHandler() {
     // @ts-ignore
     const animation = document.querySelector('.animation')[0] as HTMLElement;
     // @ts-ignore
     const animationVideo = document.querySelector('.animation__video') as HTMLVideoElement;
     // @ts-ignore
     const eye = document.querySelectorAll('.animation__eye') as HTMLCollectionOf<HTMLElement>;
-    // @ts-ignore
-    const button = document.querySelector('.form__button')[0] as HTMLElement;
-    // @ts-ignore
-    const about = document.querySelector('.about')[0] as HTMLElement;
 
     for (let i = 0; i < eye.length; i++) {
       eye[i].style.display = 'block';
@@ -71,7 +87,6 @@ export class LoginComponent implements OnInit {
     animation.style.maxHeight = '374px';
     animationVideo.style.display = 'block';
     this.fadeIn(animationVideo, 2000);
-    this.fadeIn(about, 2000);
     animationVideo.play();
 
     this.inputLogin.removeEventListener('focus', this.firstFocusHandler);
@@ -79,11 +94,9 @@ export class LoginComponent implements OnInit {
 
     this.inputLogin.addEventListener('focus', this.focusHandler);
     this.inputPassword.addEventListener('focus', this.focusHandler);
-
-    button.addEventListener('click', this.clickHandler);
   }
 
-  fadeIn(elem, speed) {
+  public fadeIn(elem, speed) {
     const inInterval = setInterval(() => {
       elem.style.opacity = Number(elem.style.opacity) + 0.02;
       if (elem.style.opacity >= 1) {
@@ -92,7 +105,7 @@ export class LoginComponent implements OnInit {
     }, speed / 50);
   }
 
-  fadeOut(elem, speed) {
+  public fadeOut(elem, speed) {
     const outInterval = setInterval(() => {
       if (!elem.style.opacity) {
         elem.style.opacity = 1;
@@ -104,7 +117,7 @@ export class LoginComponent implements OnInit {
     }, speed / 50);
   }
 
-  focusHandler(evt) {
+  public focusHandler(evt) {
     evt.preventDefault();
     evt.stopPropagation();
     const length = evt.target.value.length;
@@ -112,13 +125,13 @@ export class LoginComponent implements OnInit {
     this.setPositionTwo(length);
   }
 
-  inputHandler(evt) {
+  public inputHandler(evt) {
     const length = evt.target.value.length;
     this.setPositionOne(length);
     this.setPositionTwo(length);
   }
 
-  setPositionOne(len) {
+  public setPositionOne(len) {
     if (len < 2) {
       this.setPosition('First', 56, 110, 101, 111);
     } else if (len < 3) {
@@ -140,7 +153,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  setPositionTwo(len) {
+  public setPositionTwo(len) {
     if (len < 2) {
       this.setPosition('Second', 245, 167, 290, 168);
     } else if (len < 3) {
@@ -166,12 +179,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  blurHandler() {
+  public blurHandler() {
     this.setPosition('First', 58, 107, 104, 108);
     this.setPosition('Second', 250, 164, 296, 164);
   }
 
-  clickHandler() {
+  public clickHandler() {
     const wrapper = document.querySelector('.wrapper');
     this.inputPassword.type = 'text';
     this.fadeOut(wrapper, 1000);

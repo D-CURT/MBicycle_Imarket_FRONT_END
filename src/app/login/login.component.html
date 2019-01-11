@@ -27,10 +27,10 @@
 
 <div class="wrapper">
   <div class="animation" style="max-height: 374px;">
-    <div class="animation__eye animation__eye--one-one" style="display: block; opacity: 1; left: 58px; top: 107px;"></div>
-    <div class="animation__eye animation__eye--one-two" style="display: block; opacity: 1; left: 104px; top: 108px;"></div>
-    <div class="animation__eye animation__eye--two-one" style="display: block; opacity: 1; left: 250px; top: 164px;"></div>
-    <div class="animation__eye animation__eye--two-two" style="display: block; opacity: 1; left: 296px; top: 164px;"></div>
+    <div class="animation__eye animation__eye--one-one" style="display: block; opacity: 1; left: 58px; top: 107px;" #firstLeft></div>
+    <div class="animation__eye animation__eye--one-two" style="display: block; opacity: 1; left: 104px; top: 108px;" #firstRight></div>
+    <div class="animation__eye animation__eye--two-one" style="display: block; opacity: 1; left: 250px; top: 164px;" #secondLeft></div>
+    <div class="animation__eye animation__eye--two-two" style="display: block; opacity: 1; left: 296px; top: 164px;" #secondRight></div>
     <video class="animation__video" loop="" muted="muted" autoplay="autoplay" style="display: block; opacity: 1;" width="384" height="374">
       <source src="assets/watchers.mp4" type="video/mp4">
     </video>
@@ -39,13 +39,25 @@
     <fieldset class="form__fieldset">
       <label class="form__field form__field--login">
         <span class="form__label">Email</span>
-        <input class="form__input form__input--login" type="text" (focus)="firstFocusHandler()" [(ngModel)]="model.username" #username="ngModel">
+        <input class="form__input form__input--login" type="text" name="username" [(ngModel)]="model.username" #username="ngModel" #log>
       </label>
       <label class="form__field form__field--password">
         <span class="form__label">Password</span>
-        <input class="form__input form__input--password" type="password" (focus)="firstFocusHandler()" [(ngModel)]="model.password" #password="ngModel">
+        <input class="form__input form__input--password" type="password" name="password" [(ngModel)]="model.password" #password="ngModel" #pass>
       </label>
     </fieldset>
-    <a class="form__button">Log in</a>
+
+    <a class="form__button" (click)="clickHandler()">Log in</a>
+    <br>
+    <div [style.display]="isLogged ? 'block' : 'none'">
+    <img src="assets/images/accept1.png" alt="login_success" width="20" height="20">
+    <label>   Login successfull! Redirecting...</label>
+    </div>
+
+    <div [style.display]="isError ? 'block' : 'none'">
+    <img src="assets/images/error1.png" alt="login_error" width="20" height="20">
+    <label>   Authentication failed, please retry.</label>
+    </div>
+    <br>
   </form>
 </div>

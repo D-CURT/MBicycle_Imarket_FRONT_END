@@ -31,9 +31,9 @@ export class OrdersComponent implements OnInit {
   }
 
   send() {
-    let date2Send = (document.getElementById("id_input_DateTimePicker") as HTMLInputElement).value;
+    const date2Send = (document.getElementById('id_input_DateTimePicker') as HTMLInputElement).value;
     console.log( date2Send );
-    this.http.post('/hey',date2Send).subscribe(data=>{console.log(data)})
+    this.http.post('/hey', date2Send).subscribe(data=>{console.log(data)})
   }
 
 }
