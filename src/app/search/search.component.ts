@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ProductGetterService } from '../services/product-getter.service';
-import {GlobalService} from '../services/global.service';
+import {HttpWorksService} from '../services/http-works.service';
 
 @Component({
   selector: 'app-search',
@@ -14,18 +13,16 @@ export class SearchComponent implements OnInit {
   item: any;
 
   constructor(
-    private http: HttpClient,
     private getService: ProductGetterService,
-    private global: GlobalService
+    private httpService: HttpWorksService
     ) { }
 
   ngOnInit() {
     console.log('[SearchComponent.ngOnInit] Updating Search...');
-    const searchStr = ((document.getElementById("searchInputId") as HTMLInputElement).value);
-    this.http.get(this.global.host + '/products/allProductsSortedByNameWithNameLikeIgnoreCase/' + searchStr).subscribe(data => {
+    const searchStr = ((document.getElementById('searchInputId') as HTMLInputElement).value);
+    this.httpService.getSearchingProducts(searchStr).subscribe(data => {
       this.products = data;
     });
-
   }
 
   pushProductInfo() {

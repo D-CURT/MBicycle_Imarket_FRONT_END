@@ -1,7 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit} from '@angular/core';
 import { ProductGetterService } from './services/product-getter.service';
-import {GlobalService} from './services/global.service';
+import {HttpWorksService} from './services/http-works.service';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +13,13 @@ export class AppComponent implements OnInit {
   categories: any;
 
   constructor(
-     private httpService: HttpClient,
      private getService: ProductGetterService,
-     private global: GlobalService
+     private httpService: HttpWorksService
      ) {}
 
   ngOnInit() {
-    this.httpService.get(this.global.host + '/categories/allCategoriesSortedByName').subscribe(data => {
+    console.log('initialize');
+    this.httpService.getCategoriesGroups().subscribe(data => {
       this.categories = data;
     });
    }

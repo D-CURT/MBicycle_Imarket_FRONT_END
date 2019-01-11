@@ -46,15 +46,15 @@ export class ManageComponent implements OnInit {
     console.log('after get service, editMode = ' + this.editMode)
     if (this.editMode && this.getService.product.id != null) {
       this.product = this.getService.product;
-      this.http.get('/products/getById/'+this.getService.product.id).subscribe(data => {
+      this.http.get('/products/getById/' + this.getService.product.id).subscribe(data => {
         this.product = data;
-        this.form.id=this.product.id;
-        this.form.name=this.product.name;
+        this.form.id = this.product.id;
+        this.form.name = this.product.name;
         this.form.price = this.product.price;
-        this.form.discount=this.product.discount;
-        this.form.storeStatus=this.product.storeStatus;
-        this.form.descriptionPreview=this.product.descriptionPreview;
-        this.form.description=this.product.description;
+        this.form.discount = this.product.discount;
+        this.form.storeStatus = this.product.storeStatus;
+        this.form.descriptionPreview = this.product.descriptionPreview;
+        this.form.description = this.product.description;
       });
     } else {
       this.http.get('/categories/allCategoriesSortedByName').subscribe(data => {
@@ -83,16 +83,15 @@ export class ManageComponent implements OnInit {
 
     } else {
       const formData = new FormData();
-      formData.append('data',JSON.stringify(this.form));
+      formData.append('data', JSON.stringify(this.form));
       final_data = formData;
     }
 
-    if(this.editMode) {
+    if (this.editMode) {
       this.http.post('/products/update', final_data).subscribe(resp => {
         console.log('[Product update response] ');
       });
-    }
-    else {
+    } else {
       this.http.post('/products/add', final_data).subscribe(resp => {
         console.log('[Product add response] ');
       });

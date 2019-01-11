@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductGetterService } from '../services/product-getter.service';
 import { CartService } from '../services/cart.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import {GlobalService} from '../services/global.service';
 import {CurrentRoleService} from '../services/current-role.service';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { ActivatedRoute, Router } from '@angular/router';
+import {HttpWorksService} from '../services/http-works.service';
 
 @Component({
   selector: 'app-product-page',
@@ -15,16 +12,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductPageComponent implements OnInit {
 
   product: any;
-  productsss: string[] = [];
+  products: string[] = [];
   store = 'может быть и есть';
 
   constructor(
     private getService: ProductGetterService,
     private cartService: CartService,
-    private http: HttpClient,
-    private global: GlobalService,
     public roles: CurrentRoleService,
-    private router: Router
+    private httpService: HttpWorksService
     ) { }
 
   ngOnInit() {
@@ -37,19 +32,13 @@ export class ProductPageComponent implements OnInit {
   }
 
   addingToCart() {
-    this.productsss.push(this.getService.product.id)
-    const body = {productsIds: this.productsss}
-    this.http.post(this.global.host + '/orders/add', body).subscribe(
-      (res: Response) => {
-        console.log(res.status);
-      }
-    );
+    this.products.push(this.getService.product.id)
+    this.httpService.addToCart(this.products);
   }
 
   onEditProductClick() {
     this.getService.product = this.product;
     this.getService.manage_editMode = true;
-    this.router.navigateByUrl("/manage");
   }
 
 }
