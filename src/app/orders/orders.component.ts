@@ -19,8 +19,15 @@ export class OrdersComponent implements OnInit {
   ) { }
 
   dateTime : any;
+ 
+  orders : any;
+  managing_orders : any;
 
   ngOnInit() {
+
+    this.http.get('orders/getAll').subscribe(data=> {this.orders = data});
+    this.http.get('orders/getAll').subscribe(data=> {this.managing_orders = data});
+    
   }
 
   send() {

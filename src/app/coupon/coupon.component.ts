@@ -1,8 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'
+import { Component, OnInit } from '@angular/core';
+import {HttpWorksService} from '../services/http-works.service';
 
 @Component({
   selector: 'app-coupon',
@@ -11,15 +8,14 @@ import { ReactiveFormsModule } from '@angular/forms'
 })
 export class CouponComponent implements OnInit {
   coupons: any;
-  output: string[];
- constructor(
-   private http: HttpClient,
-   private router: Router
+  output: string[] = [];
+
+  constructor(
+   private httpService: HttpWorksService
   ) { }
-  
-ngOnInit() {
-    this.output = [];
-    this.http.get('/coupons/getAll').subscribe(data => {
+
+  ngOnInit() {
+    this.httpService.getCoupons().subscribe(data => {
       this.coupons = data;
     });
   }
@@ -27,13 +23,8 @@ ngOnInit() {
   postDelete() {
     console.log('postdel');
     console.log(this.output);
-    this.http.post('/coupons/deleteAll', this.output).subscribe(data => {
-      console.log(data);
-      this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(["/coupons"]));
-    });
-
+    this.httpService.deleteCoupons(this.output);
     console.log('end post del');
-  
   }
 
   updateOutput(event) {
