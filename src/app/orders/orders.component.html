@@ -1,0 +1,50 @@
+<div *ngIf="roles.isCustomer">
+
+</div>
+
+<div *ngIf="roles.isAdmin || roles.isManager">
+    
+      
+      <button (click)="send()"></button>
+</div>
+
+  
+<table> 
+    <tr> 
+        <th>Id</th> 
+        <th>Customer</th> 
+        <th>Payment</th> 
+        <th>Delivery</th> 
+        <th>Date Opened</th> 
+        <th>Date Paid</th> 
+        <th>Date Ready</th> 
+        <th>Date Sent</th> 
+        <th>Date Got</th> 
+        <th>Date Closed</th> 
+    </tr> 
+    <tr *ngFor="let managing_order of managing_orders"> 
+        <td>{{managing_order.id}}</td> 
+        <td>{{managing_order.login}</td> 
+        <td>{{managing_order.payment}</td> 
+        <td>{{managing_order.delivery}</td> 
+        <td>{{managing_order.dateOpened}</td> 
+        <td>{{managing_order.datePaid}</td> 
+        <td>{{managing_order.dateReady}</td> 
+        <td>{{managing_order.dateSent}</td> 
+        <td>{{managing_order.dateGot}</td> 
+        <td>{{managing_order.dateClosed}</td> 
+    </tr> 
+</table>
+
+ 
+    <h2>Trigger Picker by a Icon</h2>
+    <label class="example-input-wrapper">
+        Date Time
+        <input id="id_input_DateTimePicker" placeholder="Date Time:" [(ngModel)]="dateTime" [owlDateTime]="dt2" datetimepicker-neutral-timezone>
+        <span class="example-trigger" [owlDateTimeTrigger]="dt2">
+            <i class="fas fa-calendar-alt"></i>
+        </span>
+        <owl-date-time #dt2></owl-date-time>
+    </label>
+  
+    <h4>Value From Picker: {{dateTime}}</h4>

@@ -11,6 +11,8 @@ import { CartComponent } from './cart/cart.component';
 import { CouponComponent } from './coupon/coupon.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 import {AdminsWorkComponent} from './admins-work/admins-work.component';
+import { OrdersComponent } from './orders/orders.component';
+
 
 const routes: Routes = [
   {
@@ -59,12 +61,16 @@ const routes: Routes = [
     component: ManageProfileComponent
   },
   {
+    path: 'coupon',
+    component: CouponComponent
+  },
+  {
     path: 'angry-admin',
     component: AdminsWorkComponent
   },
   {
-    path: 'coupon',
-    component: CouponComponent
+    path: 'orders',
+    component: OrdersComponent
   }];
 
 @NgModule({
