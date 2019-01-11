@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { CartService } from '../services/cart.service';
+import {HttpWorksService} from '../services/http-works.service';
 
 @Component({
   selector: 'app-cart',
@@ -33,25 +33,23 @@ export class CartComponent implements OnInit {
   // }];
 
   constructor(
-    private http: HttpClient,
-    private cartService: CartService
+    private cartService: CartService,
+    private httpService: HttpWorksService
     ) { }
 
   ngOnInit() {
     this.purchases = this.cartService.products;
-    this.http.get('/orders/products').subscribe(data => {
+    this.httpService.getProductsInCart().subscribe(data => {
       this.products = data;
-      this.products.forEach(product => {
-        this.total += parseInt(product.price);
-      });
+    });
+    this.products.forEach(product => {
+      this.total += parseInt(product.price);
     });
   }
 
   remove(id) {
     const body = {productsIds: [id]};
-    this.http.post('/orders/deleteProduct', body).subscribe((res: Response) => {
-      console.log(res.status);
-    });
+    this.httpService.deleteProductsFromCart(body)
     for (let i in this.products) {
       if (this.products[i].id === id) {
         this.products.splice(i, 1);

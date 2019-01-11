@@ -1,11 +1,13 @@
 
-<div *ngIf="roleService.isAdmin">
+<!--<div *ngIf="roleService.isAdmin">-->
+<div>
+
 <form *ngFor="let coupon of coupons">
   <mat-checkbox
     name="{{ coupon.id }}"
     (change)="updateOutput($event)">
     {{ coupon.description }} 
-    {{ coupon.sum }} 
+    {{ coupon.sum }} +
   </mat-checkbox>
   <p></p>
 </form>
