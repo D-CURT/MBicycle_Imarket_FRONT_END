@@ -1,0 +1,11 @@
+<div class="profile-component" *ngFor="let user of users">
+  <div class="inner">{{ user.login }}</div>
+  <div class="inner">
+    <select *ngFor="let role of roles">
+      <option (change)="setCurrent(event);user.roles[0] = role">{{ role }}</option>
+    </select>
+    <span>current role {{ user.roles[0] }}</span>
+  </div>
+  <div class="inner"><input type="checkbox" (change)="isDelete = !isDelete"><span>delete him?)</span></div>
+  <div class="inner"><button (click)="sendCurrent(user)">send changes</button></div>
+</div>

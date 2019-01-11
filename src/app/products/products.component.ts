@@ -1,7 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ProductGetterService } from '../services/product-getter.service';
-import {GlobalService} from '../services/global.service';
+import {HttpWorksService} from '../services/http-works.service';
 
 @Component({
   selector: 'app-products',
@@ -11,23 +10,17 @@ import {GlobalService} from '../services/global.service';
 export class ProductsComponent implements OnInit {
 
   products: any;
-
   item: any;
-  
+
   constructor(
     private getService: ProductGetterService,
-    private http: HttpClient,
-    private global: GlobalService
+    private httpService: HttpWorksService
     ) {  }
 
   ngOnInit() {
-    
-    console.log('initialize');
-
-    this.products = this.http.get('/products/allProductsWithGroupSortedByName/' + this.getService.groupName).subscribe(data => {
+    this.httpService.getProductsByGroup(this.getService.groupName).subscribe(data => {
       this.products = data;
-      console.log("inside http client");
-    }) 
+    });
   }
 
   pushProductInfo() {

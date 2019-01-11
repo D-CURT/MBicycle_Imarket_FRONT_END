@@ -22,6 +22,7 @@ import { ProductPageComponent } from './product-page/product-page.component';
 import { CartComponent } from './cart/cart.component';
 import { CouponComponent } from './coupon/coupon.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
+import { AdminsWorkComponent } from './admins-work/admins-work.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +36,9 @@ import { ManageProfileComponent } from './manage-profile/manage-profile.componen
     SearchComponent,
     ProductPageComponent,
     CartComponent,
-    CouponComponent,
-    ManageProfileComponent
+    ManageProfileComponent,
+    AdminsWorkComponent,
+    CouponComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ProductGetterService } from '../services/product-getter.service';
 import { Router } from '@angular/router';
-import {GlobalService} from '../services/global.service';
 import {CurrentRoleService} from '../services/current-role.service';
+import {HttpWorksService} from '../services/http-works.service';
 
 @Component({
   selector: 'app-index',
@@ -13,11 +12,10 @@ import {CurrentRoleService} from '../services/current-role.service';
 export class IndexComponent implements OnInit {
 
   constructor(
-    private http: HttpClient,
     private getService: ProductGetterService,
-    private router: Router,
-    private global: GlobalService,
-    public roles: CurrentRoleService
+    public roles: CurrentRoleService,
+    public httpService: HttpWorksService,
+    public router: Router
     ) { }
 
    products: any;
@@ -34,7 +32,8 @@ export class IndexComponent implements OnInit {
        descriptionPreview: 'no comment',
        id: '122',
        storeStatus: 'true',
-       description: 'Цель всей заметки — рассказать что за устройства находятся на рынке, что в них можно достать и кому это может понадобиться'
+       description: 'Цель всей заметки — рассказать что за устройства находятс' +
+         'я на рынке, что в них можно достать и кому это может понадобиться'
      }
    ]
 
@@ -43,53 +42,55 @@ export class IndexComponent implements OnInit {
     this.checkBoxFilterApply = false;
     this.checkBoxStoreStatus = true;
     this.checkBoxWithDiscount = false;
-    this.http.get('/products/allProductsSortedByName').subscribe(data => {
+    this.httpService.getAllProducts().subscribe(data => {
       this.products = data;
     });
   }
 
   goToManage() {
-    this.getService.manage_editMode=false;
-    this.router.navigateByUrl('/manage');
+    this.getService.manage_editMode = false;
   }
 
   onAnyCheckboxChange() {
 
-    if (this.checkBoxFilterApply === true) {
+    if (this.checkBoxFilterApply) {
 
-      if (this.checkBoxStoreStatus === false && this.checkBoxWithDiscount === false ) {
-        this.http.get('/products/allProductsWithStoreStatusIsFalseAndDiscountIsNullOrderByName').subscribe(data => {
+      if (!this.checkBoxStoreStatus && !this.checkBoxWithDiscount) {
+        this.httpService.getWithoutDiscountWithoutStore().subscribe(data => {
           this.products = data;
         });
       }
 
-      if (this.checkBoxStoreStatus === true && this.checkBoxWithDiscount === false ) {
-        this.http.get('/products/allProductsWithStoreStatusIsTrueAndDiscountIsNullOrderByName').subscribe(data => {
+      if (this.checkBoxStoreStatus && !this.checkBoxWithDiscount) {
+        this.httpService.getWithoutDiscountWithStore().subscribe(data => {
           this.products = data;
         });
+
       }
 
-      if (this.checkBoxStoreStatus === false && this.checkBoxWithDiscount === true ) {
-        this.http.get('/products/allProductsWithStoreStatusIsFalseAndDiscountIsNotNullOrderByName').subscribe(data => {
+      if (!this.checkBoxStoreStatus && this.checkBoxWithDiscount) {
+        this.httpService.getWithDiscountWithoutStore().subscribe(data => {
           this.products = data;
         });
+
       }
 
-      if (this.checkBoxStoreStatus === true && this.checkBoxWithDiscount === true ) {
-        this.http.get('/products/allProductsWithStoreStatusIsTrueAndDiscountIsNotNullOrderByName').subscribe(data => {
+      if (this.checkBoxStoreStatus && this.checkBoxWithDiscount) {
+        this.httpService.getWithAll().subscribe(data => {
           this.products = data;
         });
       }
 
     } else {
-      this.http.get('/products/allProductsSortedByName').subscribe(data => {
+      this.httpService.getAllProducts().subscribe(data => {
         this.products = data;
       });
     }
-    this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(["/index"])); //Костыль для перезагрузки данных
+    this.router.navigateByUrl('/index', {skipLocationChange: true})
+      .then(() => this.router.navigate(['/index'])); // Костыль для перезагрузки данных
   }
   pushProductInfo() {
     this.getService.product = this.item;
     console.log('information about product has been sent');
   }
-}
+ }
