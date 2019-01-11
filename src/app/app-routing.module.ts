@@ -10,6 +10,7 @@ import { ProductPageComponent } from './product-page/product-page.component';
 import { CartComponent } from './cart/cart.component';
 import { CouponComponent } from './coupon/coupon.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,10 @@ const routes: Routes = [
 {
   path: 'manage-profile',
   component: ManageProfileComponent
+},
+{
+  path: 'orders',
+  component: OrdersComponent
 }];
 
 @NgModule({
