@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { ProductGetterService } from './services/product-getter.service';
 import {HttpWorksService} from './services/http-works.service';
+import { CurrentRoleService } from './services/current-role.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit {
 
   constructor(
      private getService: ProductGetterService,
-     private httpService: HttpWorksService
+     private httpService: HttpWorksService,
+     public roles: CurrentRoleService
      ) {}
 
   ngOnInit() {
