@@ -1,10 +1,10 @@
 <div class="wrapper">
-  <div class="animation" style="max-height: 374px;" #animation>
-    <div class="animation__eye animation__eye--one-one" style="display: block; opacity: 1; left: 58px; top: 107px;" #firstLeft></div>
-    <div class="animation__eye animation__eye--one-two" style="display: block; opacity: 1; left: 104px; top: 108px;" #firstRight></div>
-    <div class="animation__eye animation__eye--two-one" style="display: block; opacity: 1; left: 250px; top: 164px;" #secondLeft></div>
-    <div class="animation__eye animation__eye--two-two" style="display: block; opacity: 1; left: 296px; top: 164px;" #secondRight></div>
-    <video class="animation__video" loop="" muted="muted" autoplay="autoplay" style="display: block; opacity: 1;" width="384" height="374" #animation_video>
+  <div class="animation" style="max-height: 374px;" #animation id="animation">
+    <div class="animation__eye animation__eye--one-one" style="display: block; opacity: 1; left: 58px; top: 107px;" #firstLeft id="firstLeft"></div>
+    <div class="animation__eye animation__eye--one-two" style="display: block; opacity: 1; left: 104px; top: 108px;" #firstRight id="firstRight"></div>
+    <div class="animation__eye animation__eye--two-one" style="display: block; opacity: 1; left: 250px; top: 164px;" #secondLeft id="secondLeft"></div>
+    <div class="animation__eye animation__eye--two-two" style="display: block; opacity: 1; left: 296px; top: 164px;" #secondRight id="secondRight"></div>
+    <video class="animation__video" loop="" muted="muted" autoplay="autoplay" style="display: block; opacity: 1;" width="384" height="374" #animation_video id="animation-video">
       <source src="assets/watchers.mp4" type="video/mp4">
     </video>
   </div>
@@ -12,11 +12,11 @@
     <fieldset class="form__fieldset">
       <label class="form__field form__field--login">
         <span class="form__label">Email</span>
-        <input class="form__input form__input--login" type="text" name="username" [(ngModel)]="model.username" #username="ngModel" #log>
+        <input class="form__input form__input--login" type="text" name="username" [(ngModel)]="model.username" #username="ngModel" #log id="login">
       </label>
       <label class="form__field form__field--password">
         <span class="form__label">Password</span>
-        <input class="form__input form__input--password" type="password" name="password" [(ngModel)]="model.password" #password="ngModel" #pass>
+        <input class="form__input form__input--password" type="password" name="password" [(ngModel)]="model.password" #password="ngModel" #pass id="password">
       </label>
     </fieldset>
 

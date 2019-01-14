@@ -46,10 +46,16 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
 
-    this.eyeFirstLeft = this.firstLeft;
-    this.eyeFirstRight = this.firstRight;
-    this.eyeSecondLeft = this.secondLeft;
-    this.eyeFirstRight = this.secondRight;
+    // this.eyeFirstLeft = this.firstLeft;
+    // this.eyeFirstRight = this.firstRight;
+    // this.eyeSecondLeft = this.secondLeft;
+    // this.eyeFirstRight = this.secondRight;
+
+    this.eyeFirstLeft = document.getElementById('firstLeft') as HTMLDivElement;
+    this.eyeFirstRight = document.getElementById('firstRight') as HTMLDivElement;
+    this.eyeSecondRight = document.getElementById('secondRight') as HTMLDivElement;
+    this.eyeSecondLeft = document.getElementById('secondLeft') as HTMLDivElement;
+
     this.inputLogin = this.log;
     this.inputPassword = this.pass;
     this.animations = this.animation;
@@ -57,12 +63,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.inputLogin.nativeElement.addEventListener('focus', this.firstFocusHandler);
     this.inputPassword.nativeElement.addEventListener('focus', this.firstFocusHandler);
 
-    this.inputLogin.nativeElement.addEventListener('input', this.inputHandler);
-    this.inputPassword.nativeElement.addEventListener('input', this.inputHandler);
+    // this.inputLogin.nativeElement.addEventListener('input', this.inputHandler);
+    // this.inputPassword.nativeElement.addEventListener('input', this.inputHandler);
 
     this.inputLogin.nativeElement.addEventListener('blur', this.blurHandler);
     this.inputPassword.nativeElement.addEventListener('blur', this.blurHandler);
-    console.log(this.animations);
 
     // this.inputLogin.addEventListener('focus', this.firstFocusHandler());
     // this.inputPassword.addEventListener('focus', this.firstFocusHandler());
@@ -92,7 +97,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   public firstFocusHandler() {
-    this.animations.nativeElement.style.display = 'block';
+    const hren = document.getElementById('animation') as HTMLDivElement;
+    const hrenSVideo = document.getElementById('animation-video') as HTMLVideoElement;
+    hren.style.display = 'block';
 
     // @ts-ignore
     const eye = document.querySelectorAll('.animation__eye') as HTMLCollectionOf<HTMLElement>;
@@ -101,16 +108,28 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.fadeIn(eye[i], 2000);
     }
 
-    this.animations.nativeElement.style.maxHeight = '374px';
-    this.animationVideo.nativeElement.style.display = 'block';
-    this.fadeIn(this.animationVideo, 2000);
-    this.animationVideo.nativeElement.play();
+    // this.animationVideo.nativeElement.style.display = 'block';
+    hrenSVideo.style.display = 'block';
+    this.fadeIn(hrenSVideo, 2000);
+    hrenSVideo.play();
+    // this.animationVideo.nativeElement.play();
+    const pass = document.getElementById('password');
+    const login = document.getElementById('login');
 
-    this.inputLogin.removeEventListener('focus', this.firstFocusHandler);
-    this.inputPassword.removeEventListener('focus', this.firstFocusHandler);
+    pass.removeEventListener('focus', this.firstFocusHandler);
+    login.removeEventListener('focus', this.firstFocusHandler);
 
-    this.inputLogin.addEventListener('focus', this.focusHandler);
-    this.inputPassword.addEventListener('focus', this.focusHandler);
+    pass.addEventListener('focus', this.focusHandler);
+    login.addEventListener('focus', this.focusHandler);
+
+    pass.addEventListener('input', this.inputHandler);
+    login.addEventListener('input', this.inputHandler);
+
+    // this.inputLogin.nativeElement.removeEventListener('focus', this.firstFocusHandler);
+    // this.inputPassword.nativeElement.removeEventListener('focus', this.firstFocusHandler);
+    //
+    // this.inputLogin.nativeElement.addEventListener('focus', this.focusHandler);
+    // this.inputPassword.nativeElement.addEventListener('focus', this.focusHandler);
 
   }
 
@@ -139,12 +158,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
     evt.preventDefault();
     evt.stopPropagation();
     const length = evt.target.value.length;
+    console.log(length);
     this.setPositionOne(length);
     this.setPositionTwo(length);
   }
 
   public inputHandler(evt) {
     const length = evt.target.value.length;
+    console.log(length);
     this.setPositionOne(length);
     this.setPositionTwo(length);
   }
@@ -207,6 +228,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.inputPassword.type = 'text';
     this.fadeOut(wrapper, 2000);
   }
+
   setPosition(person, xLeft, yLeft, xRight, yRight) {
     if (person === 'Second') {
       this.eyeSecondLeft.nativeElement.style.left = xLeft + 'px';
