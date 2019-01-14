@@ -53,6 +53,7 @@ export class CartComponent implements OnInit {
     for (let i in this.products) {
       if (this.products[i].id === id) {
         this.products.splice(i, 1);
+        break;
       }
     }
   }

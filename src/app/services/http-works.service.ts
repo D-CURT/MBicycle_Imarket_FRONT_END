@@ -48,7 +48,7 @@ export class HttpWorksService {
     return this.http.get<any[]>(this.host + '/coupons/getAll');
   }
   public getProductsInCart(): Observable<any[]> {
-    return this.http.get<any[]>(this.host + '/orders/products');
+    return this.http.get<any[]>(this.host + '/orders/cart/getProducts');
   }
   public addCoupon(coupon: any) {
     this.http.post(this.host + '/coupons/add', coupon).subscribe(data => {
@@ -63,13 +63,13 @@ export class HttpWorksService {
     });
   }
   public deleteProductsFromCart(body: any) {
-    this.http.post(this.host + '/orders/deleteProduct', body).subscribe((res: Response) => {
+    this.http.post(this.host + '/orders/cart/deleteProduct', body).subscribe((res: Response) => {
       console.log(res.status);
     });
   }
   public addToCart(products: any) {
     const body = {productsIds: products};
-    this.http.post(this.host + '/orders/add', body).subscribe(
+    this.http.post(this.host + '/orders/cart/add', body).subscribe(
       (res: Response) => {
         console.log(res.status);
       }
@@ -172,16 +172,19 @@ export class HttpWorksService {
     });
   }
   setRole(username: string, password: string) {
-    let headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
-    this.http.get(this.host + '/roles/currentRole', {headers: headers}).subscribe(data => {
+    // let headers: HttpHeaders = new HttpHeaders();
+    // headers = headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
+    // this.http.get(this.host + '/roles/currentRole', {headers: headers}).subscribe(data => {
+    //   this.roles.setRoles(data[0].authority);
+    // });
+    this.http.get(this.host + '/roles/currentRole').subscribe(data => {
       this.roles.setRoles(data[0].authority);
     });
   }
   updateProfile(form: any) {
     let message = '';
     return new Promise((resolve, reject) => {
-      this.http.post(this.host + '/profiles/update', form, {headers: this.loggedHeaders}).subscribe(
+      this.http.post(this.host + '/profiles/update', form).subscribe(
         (resp: Response) => {
           console.log('[Profile Update]: Profile updated.' );
           resolve();
@@ -202,11 +205,7 @@ export class HttpWorksService {
     });
   }
   getProfile(){
-    // console.log('sending profile get with loggedHeaders = ' + this.loggedHeaders.get('authorization'));
-    // return this.http.get(this.host + '/profiles/get', {headers: this.loggedHeaders});
-    
-    const httpOptions22 = { headers: {},  withCredentials: true}
-    return this.http.get(this.host + '/profiles/get', httpOptions22);
+    return this.http.get(this.host + '/profiles/get');
   }
   getProductById(id: any) {
     return this.http.get(this.host + '/products/getById/' + id);

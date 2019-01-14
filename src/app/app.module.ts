@@ -27,6 +27,9 @@ import { AdminsWorkComponent } from './admins-work/admins-work.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { OrdersComponent } from './orders/orders.component';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthorizationInterceptorService } from './services/authorization-interceptor.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +61,11 @@ import { OrdersComponent } from './orders/orders.component';
     OwlDateTimeModule,
     OwlNativeDateTimeModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthorizationInterceptorService,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
