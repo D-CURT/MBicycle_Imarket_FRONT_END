@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {GlobalService} from '../services/global.service';
+import { HttpWorksService } from '../services/http-works.service';
 
 @Component({
   selector: 'app-manage-profile',
@@ -19,8 +20,9 @@ export class ManageProfileComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private global: GlobalService
-              ) {}
+    private global: GlobalService,
+    private httpService: HttpWorksService
+    ) {}
 
   ngOnInit() {
     
@@ -30,7 +32,7 @@ export class ManageProfileComponent implements OnInit {
     this.imageStatusSrc = 'assets/images/accept1.png';
     this.imageStatusAlt = '123';
     
-    this.http.get(this.global.host + '/profiles/get').subscribe(
+    this.httpService.getProfile().subscribe(
       data => {
         this.form = data;
         console.log('[Profile Get]: Successfull');
@@ -49,43 +51,23 @@ export class ManageProfileComponent implements OnInit {
     }
   }
 
-  doUpdate() {
-    return new Promise((resolve, reject) => {
-      this.http.post(this.global.host + '/profiles/update', this.form).subscribe(
-        (resp: Response) => {
-          console.log('[Profile Update]: Profile updated.' );
-          this.messageAfterUpdate = '   Profile updated.';
-          this.isUpdated = true;
-          resolve();
-        },
-        (error) => {
-          const errorResponsed = error as Response;
-          console.log('Error status (response) = ' + errorResponsed.status +' (' + errorResponsed.statusText + ')');
-          if (errorResponsed.status === 204) {
-            console.log('[Profile Update] Update failed = Server Internal Error');
-            this.messageAfterUpdate = '   Update failed = Server Internal Error';
-            this.isUpdated = false;
-          } else {
-            console.log('[Profile Update] Update failed = Unknown reason');
-            this.messageAfterUpdate = '   Update failed = Unknown reason';
-            this.isUpdated = false;
-          }
-          reject(error);
-        }
-      );
-    });
-  }
-  
   submitUpdate() {
-    this.innerUnpdate();
+    this.innerUpdate();
   }
 
-  async innerUnpdate() {
+  async innerUpdate() {
     try {
-      let promise = await this.doUpdate();
-    } catch(e) {
-      
-    }
+
+      let promise = await this.httpService.updateProfile(this.form).then(() => {
+        this.messageAfterUpdate = '   Profile updated.';
+        this.isUpdated = true;
+      })
+      .catch(message => {
+        this.messageAfterUpdate = message;
+        this.isUpdated = false;
+      });
+
+    } catch(e) { }
     
     this.statusUpdate();
     let wait = async (time) => new Promise((resolve) => setTimeout(resolve, time));
