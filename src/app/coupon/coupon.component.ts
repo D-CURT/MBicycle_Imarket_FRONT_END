@@ -32,7 +32,7 @@ export class CouponComponent implements OnInit {
   }
 
 
-  onSubmitAddCupon(){
+  onSubmitAddCupon() {
 
     console.log(this.model.description);
     console.log(this.model.sum);
@@ -44,7 +44,7 @@ export class CouponComponent implements OnInit {
 
     this.http.post('/coupons/add', couponDTO).subscribe(data => {
       console.log(couponDTO);
-      this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(["/coupon"]));
+      this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(["coupon"]));
     });
   }
 
@@ -54,11 +54,11 @@ export class CouponComponent implements OnInit {
     console.log('postdel');
     console.log(this.output);
     this.httpService.deleteCoupons(this.output);
-    //this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(["/coupon"]));
+   // this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(["/coupon"]));
     console.log('end post del');
   }
 
-  updateOutput(event) {
+  updateCheckedCoupons(event) {
     console.log('event!');
     if (event.checked) {
       console.log('push!');

@@ -5,7 +5,7 @@
 <form *ngFor="let coupon of coupons">
   <mat-checkbox
     name="{{ coupon.id }}"
-    (change)="updateOutput($event)">
+    (change)="updateCheckedCoupons($event)">
     {{ coupon.description }} 
     {{ coupon.sum }}
   </mat-checkbox>
@@ -41,11 +41,11 @@
 
 
 
-<div *ngIf="roleService.isManager">
+<!--<div *ngIf="roleService.isManager">-->
 
-    <select ui-select2 ng-model="selectedSingle" data-placeholder="-- Select One --">
-        <option></option>
-        <option ng-repeat="item in items" value="{{item.id}}">{{item.name}}</option>
-     </select>
+    <!--<select ui-select2 ng-model="selectedSingle" data-placeholder="&#45;&#45; Select One &#45;&#45;">-->
+        <!--<option></option>-->
+        <!--<option ng-repeat="item in items" value="{{item.id}}">{{item.name}}</option>-->
+     <!--</select>-->
 
-</div>
+<!--</div>-->

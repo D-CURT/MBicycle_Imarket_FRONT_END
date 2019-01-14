@@ -49,7 +49,7 @@ export class HttpWorksService {
   public deleteCoupons(coupons: string[]) {
     this.http.post(this.host + '/coupons/deleteAll', coupons).subscribe(data => {
       console.log(data);
-      this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(['/coupons']));
+      this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(['/coupon']));
     });
   }
   public deleteProductsFromCart(body: any) {

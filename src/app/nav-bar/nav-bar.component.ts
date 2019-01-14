@@ -21,7 +21,7 @@ export class NavBarComponent implements OnInit {
     private router: Router,
     public getService: ProductGetterService,
     public cartService: CartService,
-    private httpService: HttpWorksService
+    public httpService: HttpWorksService
     ) { }
 
   ngOnInit() {
