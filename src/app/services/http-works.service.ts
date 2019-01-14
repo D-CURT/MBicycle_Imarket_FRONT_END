@@ -114,7 +114,9 @@ export class HttpWorksService {
       console.log('headers = ' + headers.get('authorization'));
       console.log('loggedHeaders = ' + this.loggedHeaders.get('authorization'));
       headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
-      this.http.post( this.host + '/login', null, {headers: headers})
+      // this.http.post( this.host + '/login', null, {headers: headers}
+      const httpOptions22 = { headers: headers,  withCredentials: true}
+      this.http.post( this.host + '/login', null, httpOptions22)
         .subscribe (
           (res: Response) => {
             console.log('[Login] Point Entry IN res: response');
@@ -200,8 +202,11 @@ export class HttpWorksService {
     });
   }
   getProfile(){
-    console.log('sending profile get with loggedHeaders = ' + this.loggedHeaders.get('authorization'));
-    return this.http.get(this.host + '/profiles/get', {headers: this.loggedHeaders});    
+    // console.log('sending profile get with loggedHeaders = ' + this.loggedHeaders.get('authorization'));
+    // return this.http.get(this.host + '/profiles/get', {headers: this.loggedHeaders});
+    
+    const httpOptions22 = { headers: {},  withCredentials: true}
+    return this.http.get(this.host + '/profiles/get', httpOptions22);
   }
   getProductById(id: any) {
     return this.http.get(this.host + '/products/getById/' + id);
