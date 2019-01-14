@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   constructor(
      private getService: ProductGetterService,
-     private httpService: HttpWorksService,
+     public httpService: HttpWorksService,
      public roles: CurrentRoleService
      ) {}
 
