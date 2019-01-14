@@ -27,7 +27,7 @@
     <img src="assets/images/accept1.png" alt="register_success" width="20" height="20">  
     <label>   Registeration successfull! Autologin and redirecting...</label>
   </div>  
-  <div [style.display]="!isRegistred ? 'block' : 'none'">
+  <div [style.display]="isError ? 'block' : 'none'">
     <img src="assets/images/error1.png" alt="register_error" width="20" height="20">  
     <label id="errorText">   Registration failed.</label>
   </div>

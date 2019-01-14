@@ -3,6 +3,7 @@ import { NavBarComponent} from '../nav-bar/nav-bar.component';
 import { SearchComponent } from '../search/search.component';
 import {HttpWorksService} from '../services/http-works.service';
 import {ElementDef} from '@angular/core/src/view';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('pass') pass: ElementRef;
 
   constructor(
-    private httpService: HttpWorksService
+    private httpService: HttpWorksService,
+    public router: Router
     ) { }
 
   ngOnInit() {}
@@ -65,10 +67,20 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   login() {
-   this.isLogged = this.httpService.auth(this.model);
-   if (!this.isLogged) {
-     this.isError = true;
-   }
+    this.httpService.promisedLogin(this.model).then(() => {
+      this.isLogged = true;
+      this.isError = false;
+    })
+    .catch(err => {
+      this.isLogged = false;
+      this.isError = true;
+    });
+    (async () => {
+      this.loginFadeHandler();
+      await new Promise((resolve) => setTimeout(() => resolve(), 2000));
+      this.router.navigateByUrl('/index');
+      console.log('Login done with status: ' + this.isLogged);
+    })();
   }
 
   public firstFocusHandler() {
@@ -184,10 +196,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.setPosition('Second', 250, 164, 296, 164);
   }
 
-  public clickHandler() {
+  public loginFadeHandler() {
     const wrapper = document.querySelector('.wrapper');
     this.inputPassword.type = 'text';
-    this.fadeOut(wrapper, 1000);
+    this.fadeOut(wrapper, 2000);
   }
   setPosition(person, xLeft, yLeft, xRight, yRight) {
     if (person === 'Second') {

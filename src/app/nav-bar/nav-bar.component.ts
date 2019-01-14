@@ -35,7 +35,11 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     console.log('[Logout] Trying to logout...');
-    this.isLogged = this.httpService.logout();
+    this.httpService.promisedLogout().then(() => {
+      this.isLogged = true;
+    })
+    .catch(err => {
+    });  
   }
 
   searchKeyPress(event) {

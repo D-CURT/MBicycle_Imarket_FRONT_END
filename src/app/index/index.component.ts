@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductGetterService } from '../services/product-getter.service';
 import { Router } from '@angular/router';
-import {CurrentRoleService} from '../services/current-role.service';
 import {HttpWorksService} from '../services/http-works.service';
 
 @Component({
@@ -13,7 +12,6 @@ export class IndexComponent implements OnInit {
 
   constructor(
     private getService: ProductGetterService,
-    public roles: CurrentRoleService,
     public httpService: HttpWorksService,
     public router: Router
     ) { }
