@@ -13,13 +13,22 @@ export class RegistrationComponent implements OnInit {
 
   model: any = {};
   isRegistred: boolean;
+  isError: boolean;
 
   constructor(private httpService: HttpWorksService) { }
 
-  ngOnInit() {}
-
-  register() {
-    this.isRegistred = this.httpService.registr(this.model);
+  ngOnInit() {
   }
 
+  register() {
+    this.httpService.promisedRegistr(this.model).then(() => {
+      this.isRegistred = true;
+      this.isError = false;
+    })
+    .catch(err => {
+      this.isRegistred = false;
+      this.isError = true;
+    });  
+  }
+  
 }
