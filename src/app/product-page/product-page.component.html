@@ -4,7 +4,7 @@
     <figure>
       <img src="assets/images/default.png" alt="">
       <figcaption>
-        <p>{{ product.price }}</p>
+        <span>Price: {{ product.price }}$</span>
         <p>{{ store }}</p>
         <button (click)="addingToCart()">Add to cart</button>
         <a routerLink="/manage"><button *ngIf="roles.isManager" (click)="onEditProductClick()">Edit product</button></a>

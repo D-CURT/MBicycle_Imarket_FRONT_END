@@ -16,6 +16,7 @@
 
 .product-description {
     margin-right: 20%;
+    width: 50%;
 }
 
 .filters {
@@ -28,7 +29,7 @@
 }
 
 figure {
-    margin-left: 30%;
+    margin-left: 15%;
 }
 
 .example-form {
@@ -41,7 +42,19 @@ figure {
     margin: auto;
 }
 
-/* временно */
-div {
+.product:hover {
     border: 1px solid black;
+}
+
+a {
+  text-decoration: none;
+  color: #333333;
+}
+
+a:hover {
+  color: blueviolet;
+}
+
+img:hover {
+  box-shadow: 0 0 5px 1px black;
 }

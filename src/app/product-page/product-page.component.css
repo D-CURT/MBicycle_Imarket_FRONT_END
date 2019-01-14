@@ -1,5 +1,13 @@
-div, img {
+img {
     border: 1px solid black;
+}
+
+h1 {
+  text-align: center;
+}
+
+figcaption > span {
+  box-shadow: 0 0 5px 1px black;
 }
 
 .outer {
@@ -15,6 +23,10 @@ div, img {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.description {
+  width: 60%;
 }
 
 .picture img {

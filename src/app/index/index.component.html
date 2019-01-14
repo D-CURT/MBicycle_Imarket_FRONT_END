@@ -13,7 +13,7 @@
 
 <div class="product" *ngFor="let product of products">
     <figure>
-      <img src="assets/images/default.png" alt="product-image">
+      <a routerLink="/product" (click)="item=product;pushProductInfo()"><img src="assets/images/default.png" alt="product-image"></a>
       <figcaption>{{ product.price }}$</figcaption>
     </figure>
     <div class="product-description">
