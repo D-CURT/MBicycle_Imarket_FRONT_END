@@ -3,6 +3,7 @@ import { NavBarComponent} from '../nav-bar/nav-bar.component';
 import { SearchComponent } from '../search/search.component';
 import {HttpWorksService} from '../services/http-works.service';
 import {ElementDef} from '@angular/core/src/view';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,15 +14,19 @@ import {ElementDef} from '@angular/core/src/view';
 export class LoginComponent implements OnInit, AfterViewInit {
 
   model: any = {};
-  isError: boolean;
 
+  isError: boolean;
   isLogged: boolean;
+
   inputLogin: any;
   inputPassword: any;
+
   eyeFirstLeft: any;
   eyeFirstRight: any;
   eyeSecondLeft: any;
   eyeSecondRight: any;
+
+  animations: any;
 
   @ViewChild('firstLeft') firstLeft: ElementRef;
   @ViewChild('firstRight') firstRight: ElementRef;
@@ -29,9 +34,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('secondRight') secondRight: ElementRef;
   @ViewChild('log') log: ElementRef;
   @ViewChild('pass') pass: ElementRef;
+  @ViewChild('animation') animation: ElementRef;
+  @ViewChild('animation_video') animationVideo: ElementRef;
 
   constructor(
-    private httpService: HttpWorksService
+    private httpService: HttpWorksService,
+    public router: Router
     ) { }
 
   ngOnInit() {}
@@ -44,6 +52,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.eyeFirstRight = this.secondRight;
     this.inputLogin = this.log;
     this.inputPassword = this.pass;
+    this.animations = this.animation;
 
     this.inputLogin.nativeElement.addEventListener('focus', this.firstFocusHandler);
     this.inputPassword.nativeElement.addEventListener('focus', this.firstFocusHandler);
@@ -53,6 +62,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     this.inputLogin.nativeElement.addEventListener('blur', this.blurHandler);
     this.inputPassword.nativeElement.addEventListener('blur', this.blurHandler);
+    console.log(this.animations);
 
     // this.inputLogin.addEventListener('focus', this.firstFocusHandler());
     // this.inputPassword.addEventListener('focus', this.firstFocusHandler());
@@ -65,35 +75,43 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   login() {
-   this.isLogged = this.httpService.auth(this.model);
-   if (!this.isLogged) {
-     this.isError = true;
-   }
+    this.httpService.promisedLogin(this.model).then(() => {
+      this.isLogged = true;
+      this.isError = false;
+    })
+    .catch(err => {
+      this.isLogged = false;
+      this.isError = true;
+    });
+    (async () => {
+      this.loginFadeHandler();
+      await new Promise((resolve) => setTimeout(() => resolve(), 2000));
+      this.router.navigateByUrl('/index');
+      console.log('Login done with status: ' + this.isLogged);
+    })();
   }
 
   public firstFocusHandler() {
-    // @ts-ignore
-    const animation = document.querySelector('.animation')[0] as HTMLElement;
-    // @ts-ignore
-    const animationVideo = document.querySelector('.animation__video') as HTMLVideoElement;
+    this.animations.nativeElement.style.display = 'block';
+
     // @ts-ignore
     const eye = document.querySelectorAll('.animation__eye') as HTMLCollectionOf<HTMLElement>;
-
     for (let i = 0; i < eye.length; i++) {
       eye[i].style.display = 'block';
       this.fadeIn(eye[i], 2000);
     }
 
-    animation.style.maxHeight = '374px';
-    animationVideo.style.display = 'block';
-    this.fadeIn(animationVideo, 2000);
-    animationVideo.play();
+    this.animations.nativeElement.style.maxHeight = '374px';
+    this.animationVideo.nativeElement.style.display = 'block';
+    this.fadeIn(this.animationVideo, 2000);
+    this.animationVideo.nativeElement.play();
 
     this.inputLogin.removeEventListener('focus', this.firstFocusHandler);
     this.inputPassword.removeEventListener('focus', this.firstFocusHandler);
 
     this.inputLogin.addEventListener('focus', this.focusHandler);
     this.inputPassword.addEventListener('focus', this.focusHandler);
+
   }
 
   public fadeIn(elem, speed) {
@@ -184,22 +202,22 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.setPosition('Second', 250, 164, 296, 164);
   }
 
-  public clickHandler() {
+  public loginFadeHandler() {
     const wrapper = document.querySelector('.wrapper');
     this.inputPassword.type = 'text';
-    this.fadeOut(wrapper, 1000);
+    this.fadeOut(wrapper, 2000);
   }
   setPosition(person, xLeft, yLeft, xRight, yRight) {
     if (person === 'Second') {
-      this.eyeSecondLeft.style.left = xLeft + 'px';
-      this.eyeSecondLeft.style.top = yLeft + 'px';
-      this.eyeSecondLeft.style.left = xRight + 'px';
-      this.eyeSecondLeft.style.top = yRight + 'px';
+      this.eyeSecondLeft.nativeElement.style.left = xLeft + 'px';
+      this.eyeSecondLeft.nativeElement.style.top = yLeft + 'px';
+      this.eyeSecondRight.nativeElement.style.left = xRight + 'px';
+      this.eyeSecondRight.nativeElement.style.top = yRight + 'px';
     } else if (person === 'First') {
-      this.eyeSecondRight.style.left = xLeft + 'px';
-      this.eyeSecondRight.style.top = yLeft + 'px';
-      this.eyeSecondRight.style.left = xRight + 'px';
-      this.eyeSecondRight.style.top = yRight + 'px';
+      this.eyeFirstRight.nativeElement.style.left = xLeft + 'px';
+      this.eyeFirstRight.nativeElement.style.top = yLeft + 'px';
+      this.eyeFirstLeft.nativeElement.style.left = xRight + 'px';
+      this.eyeFirstLeft.nativeElement.style.top = yRight + 'px';
     }
   }
 }

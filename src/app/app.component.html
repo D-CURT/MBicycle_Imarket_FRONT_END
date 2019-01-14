@@ -13,5 +13,9 @@
       </li>
   </ul>
 </div>
-<a routerLink="/coupon"><button>coupons</button></a>
+<a routerLink="/manage-profile" *ngIf="httpService.isLogged"><button>Edit profile</button></a>
+<a routerLink="/manage"><button *ngIf="roles.isManager" (click)="goToManage()">Add product</button></a>
+<a routerLink="/angry-admin" *ngIf="roles.isAdmin"><button>Edit users roles</button></a>
+<a routerLink="/orders" *ngIf="httpService.isLogged"><button>Orders</button></a>
+<a routerLink="/coupon" *ngIf="roles.isAdmin || roles.isManager"><button>Coupons</button></a>
 <router-outlet></router-outlet>
