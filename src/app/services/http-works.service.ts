@@ -14,6 +14,7 @@ export class HttpWorksService {
   private host = 'http://localhost:8080';
   public isLogged: boolean;
   private items: any;
+  private loggedHeaders: any;
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -103,6 +104,9 @@ export class HttpWorksService {
       const pas: string = model.password;
       let headers: HttpHeaders = new HttpHeaders();
       headers = headers.append('Authorization', 'Basic ' + btoa(usr + ':' + pas));
+      this.loggedHeaders = headers;
+      console.log('headers = ' + headers.get('authorization'));
+      console.log('loggedHeaders = ' + this.loggedHeaders.get('authorization'));
       headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
       this.http.post( this.host + '/login', null, {headers: headers})
         .subscribe (
@@ -147,6 +151,7 @@ export class HttpWorksService {
               this.roles.isAdmin = false;
               this.roles.isCustomer = false;
               this.roles.isManager = false;
+              this.loggedHeaders = null;
 
               this.router.navigateByUrl('/index');
               resolve();
@@ -159,11 +164,46 @@ export class HttpWorksService {
     });
   }
   setRole(username: string, password: string) {
-
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
     this.http.get(this.host + '/roles/currentRole', {headers: headers}).subscribe(data => {
       this.roles.setRoles(data[0].authority);
     });
+  }
+  updateProfile(form: any) {
+    let message = '';
+    return new Promise((resolve, reject) => {
+      this.http.post(this.host + '/profiles/update', form, {headers: this.loggedHeaders}).subscribe(
+        (resp: Response) => {
+          console.log('[Profile Update]: Profile updated.' );
+          resolve();
+        },
+        (error) => {
+          const errorResponsed = error as Response;
+          console.log('Error status (response) = ' + errorResponsed.status +' (' + errorResponsed.statusText + ')');
+          if (errorResponsed.status === 400) {  //was 204
+            console.log('[Profile Update] Update failed = Server Internal Error');
+            message = 'Update failed = Server Internal Error';
+          } else {
+            console.log('[Profile Update] Update failed = Unknown reason');
+            message = 'Update failed = Unknown reason';
+          }
+          reject(message);
+        }
+      );
+    });
+  }
+  getProfile(){
+    console.log('sending profile get with loggedHeaders = ' + this.loggedHeaders.get('authorization'));
+    return this.http.get(this.host + '/profiles/get', {headers: this.loggedHeaders});    
+  }
+  getProductById(id: any) {
+    return this.http.get(this.host + '/products/getById/' + id);
+  }
+  updateProduct(data: any) {
+    return this.http.post(this.host + '/products/update', data);
+  }
+  addProduct(data: any) {
+    return this.http.post(this.host + '/products/add', data);
   }
 }

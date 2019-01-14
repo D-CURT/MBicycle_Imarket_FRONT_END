@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http'
 import {GlobalService} from '../services/global.service';
 import { ProductGetterService } from '../services/product-getter.service';
+import { HttpWorksService } from '../services/http-works.service';
 
 @Component({
   selector: 'app-manage',
@@ -35,7 +36,8 @@ export class ManageComponent implements OnInit {
   constructor(
     private getService: ProductGetterService,
     private http: HttpClient,
-    private global: GlobalService
+    private global: GlobalService,
+    private httpService: HttpWorksService
     ) {
       this.editMode = false;
     }
@@ -43,10 +45,9 @@ export class ManageComponent implements OnInit {
   ngOnInit() {
     console.log('ngOnInit(), editMode = ' + this.editMode)
     this.editMode = this.getService.manage_editMode;
-    console.log('after get service, editMode = ' + this.editMode)
     if (this.editMode && this.getService.product.id != null) {
       this.product = this.getService.product;
-      this.http.get('/products/getById/' + this.getService.product.id).subscribe(data => {
+      this.httpService.getProductById(this.getService.product.id).subscribe(data => {
         this.product = data;
         this.form.id = this.product.id;
         this.form.name = this.product.name;
@@ -57,7 +58,7 @@ export class ManageComponent implements OnInit {
         this.form.description = this.product.description;
       });
     } else {
-      this.http.get('/categories/allCategoriesSortedByName').subscribe(data => {
+      this.httpService.getCategoriesGroups().subscribe(data => {
         this.categories = data;
       });
     }
@@ -88,11 +89,11 @@ export class ManageComponent implements OnInit {
     }
 
     if (this.editMode) {
-      this.http.post('/products/update', final_data).subscribe(resp => {
+      this.httpService.updateProduct(final_data).subscribe(resp => {
         console.log('[Product update response] ');
       });
     } else {
-      this.http.post('/products/add', final_data).subscribe(resp => {
+      this.httpService.addProduct(final_data).subscribe(resp => {
         console.log('[Product add response] ');
       });
     }
