@@ -109,13 +109,14 @@ export class HttpWorksService {
         (error) => {
           const errorResponsed = error as Response;
           console.log('Error status (response) = ' + errorResponsed.status);
-          if (errorResponsed.status === 404) {
+          if (errorResponsed.status === 302) {
             console.log('Login Successfull');
             this.isLogged = true;
             this.setRole(usr, pas);
             (async () => {
               await new Promise((resolve) => setTimeout(() => resolve(), 2000));
               this.router.navigateByUrl('/index');
+              console.log('router -> index');
             })();
             returned = false;
           } else if (errorResponsed.status === 401) {
@@ -150,7 +151,7 @@ export class HttpWorksService {
 
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
-    this.http.get(this.host + '/roles/currentRole'/*, {headers: headers}*/).subscribe(data => {
+    this.http.get(this.host + '/roles/currentRole', {headers: headers}).subscribe(data => {
       this.roles.setRoles(data[0].authority);
     });
   }

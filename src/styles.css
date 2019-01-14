@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+
 html {
     background-color: #e3e3e3;
   }
@@ -20,4 +21,3 @@ html {
 
 
 
-  
