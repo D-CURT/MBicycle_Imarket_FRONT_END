@@ -32,6 +32,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   addingToCart() {
+    this.products = [];
     this.products.push(this.getService.product.id)
     this.httpService.addToCart(this.products);
   }
