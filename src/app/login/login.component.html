@@ -47,7 +47,7 @@
       </label>
     </fieldset>
 
-    <a class="form__button" (click)="clickHandler()">Log in</a>
+    <a class="form__button" (click)="clickHandler(); login()">Log in</a>
     <br>
     <div [style.display]="isLogged ? 'block' : 'none'">
     <img src="assets/images/accept1.png" alt="login_success" width="20" height="20">
