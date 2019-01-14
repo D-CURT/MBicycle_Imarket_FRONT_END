@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpWorksService} from '../services/http-works.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {CurrentRoleService} from '../services/current-role.service';
 
 @Component({
   selector: 'app-coupon',
@@ -10,15 +11,15 @@ import { Router } from '@angular/router';
 })
 export class CouponComponent implements OnInit {
   coupons: any;
-  output: string[] = [];
-  removableCoupons: string[];
+  removableCoupons: string[] = [];
   customs: any;
   model: any = {};
 
   constructor(
    private httpService: HttpWorksService,
    private http: HttpClient,
-   private router: Router
+   private router: Router,
+   public roles: CurrentRoleService
   ) { }
 
   ngOnInit() {
@@ -42,27 +43,22 @@ export class CouponComponent implements OnInit {
       sum: this.model.sum,
     }
 
-    this.http.post('/coupons/add', couponDTO).subscribe(data => {
-      console.log(couponDTO);
-      this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(["coupon"]));
-    });
+    this.httpService.addCoupon(couponDTO);
   }
 
 
 
   postDelete() {
     console.log('postdel');
-    console.log(this.output);
-    this.httpService.deleteCoupons(this.output);
-   // this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(["/coupon"]));
-    console.log('end post del');
+    console.log(this.removableCoupons);
+    this.httpService.deleteCoupons(this.removableCoupons);
   }
 
   updateCheckedCoupons(event) {
     console.log('event!');
     if (event.checked) {
-      console.log('push!');
       this.removableCoupons.push(event.source.name);
+      console.log('pushed ' + event.source.name);
     } else {
       console.log('else!');
       this.removableCoupons.splice(this.removableCoupons.indexOf(event.source.name), 1);

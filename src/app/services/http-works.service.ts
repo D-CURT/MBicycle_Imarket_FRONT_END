@@ -49,6 +49,12 @@ export class HttpWorksService {
   public getProductsInCart(): Observable<any[]> {
     return this.http.get<any[]>(this.host + '/orders/products');
   }
+  public addCoupon(coupon: any) {
+    this.http.post(this.host + '/coupons/add', coupon).subscribe(data => {
+      console.log(data);
+      this.router.navigateByUrl('/index', {skipLocationChange: true}).then(() => this.router.navigate(['/coupon']));
+    });
+  }
   public deleteCoupons(coupons: string[]) {
     this.http.post(this.host + '/coupons/deleteAll', coupons).subscribe(data => {
       console.log(data);
