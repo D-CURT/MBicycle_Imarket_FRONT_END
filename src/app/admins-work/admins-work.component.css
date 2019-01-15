@@ -1,0 +1,21 @@
+.profile-component {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border: 1px solid black;
+}
+
+.profile-component > * {
+
+}
+
+.profile-component .inner-role {
+  width: 275px;
+}
+
+.profile-component .inner {
+  width: 100px;
+}
